@@ -1,0 +1,28 @@
+/* src/components/Button.module.css */
+
+/* 기본 스타일 (모바일) */
+.button {
+    width: 100%; /* 모바일에서는 화면에 꽉 차게 */
+    padding: 0.75rem 1rem; /* 12px 16px */
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    color: white;
+    background-color: #00AB55; /* FarmUs 메인 색상 */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .button:hover {
+    background-color: #008f47;
+  }
+  
+  /* --- 👇 반응형 코드 부분 --- */
+  /* 화면 너비가 768px 이상일 때 (태블릿 & 데스크탑) */
+  @media (min-width: 768px) {
+    .button {
+      width: auto; /* 내용에 맞게 너비 자동 조절 */
+      padding: 0.875rem 2rem; /* 14px 32px, 조금 더 크게 */
+    }
+  }

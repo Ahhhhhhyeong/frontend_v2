@@ -1,4 +1,45 @@
 /* src/index.css */
+/* -------------------------------------------------- */
+/* 1. 박스 크기 계산법 통일 (레이아웃의 기본) */
+/* -------------------------------------------------- */
+/* 모든 요소의 padding과 border를 너비/높이에 포함시켜 계산을 편하게 합니다. */
+/* src/index.css */
+
+/* -------------------------------------------------- */
+/* 1. 박스 크기 계산법 통일 (레이아웃의 기본) */
+/* -------------------------------------------------- */
+/* 모든 요소의 padding과 border를 너비/높이에 포함시켜 계산을 편하게 합니다. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------- */
+/* 2. 전역 폰트 및 기본 스타일 설정 */
+/* -------------------------------------------------- */
+/* body에 기본 폰트와 배경색 등을 설정합니다. */
+body {
+  margin: 0; /* 기본 마진 제거 */
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* -------------------------------------------------- */
+/* 3. 반응형 이미지 기본 설정 (매우 중요!) */
+/* -------------------------------------------------- */
+/* 모든 이미지가 부모 요소의 너비를 넘어가지 않도록 설정합니다. */
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block; /* 이미지 아래의 불필요한 여백 제거 */
+}
+
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
 
 @tailwind base;
@@ -8,6 +49,8 @@
 html,
 body,
 #root {
+   --primary-color: #00AB55;
+   --text-color: #333;
    width: 100%;
    height: 100%;
    margin: 0;
@@ -15,3 +58,4 @@ body,
    background-color: #f3f4f6; /* 전체 페이지 배경색 */
    font-family: 'Pretendard', sans-serif; /* 기본 폰트를 Pretendard로 설정 */
 }
+

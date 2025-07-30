@@ -1,0 +1,17 @@
+/* src/pages/MainPage.module.css */
+
+/* 페이지의 메인 콘텐츠 영역을 감싸는 컨테이너 스타일 */
+.mainContainer {
+    /* Tailwind 'px-4' -> 양옆에 1rem (16px)의 패딩 */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  
+    /* Tailwind 'py-6' -> 위아래에 1.5rem (24px)의 패딩 */
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    
+    /* Tailwind 'space-y-10' -> 자식 요소들 사이에 2.5rem (40px)의 세로 간격 */
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; 
+  }

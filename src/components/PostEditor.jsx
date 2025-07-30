@@ -27,7 +27,7 @@ export default function PostEditor({ onClose, onCreatePost }) {
     const handleImageSelect = (imgUrl) => {
         setSelectedImages(prev => {
             if (prev.includes(imgUrl)) {
-                if (prev.length === 1) return prev;
+               if (prev.length === 1) return prev;
                 return prev.filter(url => url !== imgUrl);
             } else {
                 return [...prev, imgUrl];

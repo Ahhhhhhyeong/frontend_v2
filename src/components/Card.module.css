@@ -1,0 +1,571 @@
+.bannerChild {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 12px;
+    width: 335px;
+    height: 447px;
+    object-fit: cover;
+}
+.icon {
+    width: 270px;
+    position: relative;
+    height: 51.6px;
+}
+.userChild {
+    width: 32px;
+    position: relative;
+    border-radius: 999px;
+    max-height: 100%;
+    object-fit: cover;
+}
+.div1 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 600;
+}
+.user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+}
+.title {
+    position: absolute;
+    top: 320px;
+    left: 24px;
+    width: 287px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+}
+.banner {
+    width: 335px;
+    position: relative;
+    height: 446px;
+}
+.div2 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+    font-weight: 600;
+}
+.div3 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 22px;
+    font-weight: 500;
+}
+.chip {
+    border-radius: 999px;
+    background-color: #3b4149;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 11px;
+    color: #fff;
+}
+.div4 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 22px;
+}
+.chip1 {
+    border-radius: 999px;
+    border: 1px solid #f0f1f3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+}
+.tabGroup {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    font-size: 16px;
+    color: #6b7684;
+}
+.img1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 8px;
+    background-color: #d9d9d9;
+    width: 121px;
+    height: 120px;
+}
+.heartIcon {
+    position: absolute;
+    top: 10px;
+    left: 95px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+}
+.img {
+    width: 121px;
+    position: relative;
+    height: 120px;
+}
+.div7 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 600;
+}
+.div8 {
+    position: relative;
+    line-height: 140%;
+    font-weight: 600;
+}
+.div9 {
+    position: relative;
+    line-height: 140%;
+    font-weight: 600;
+    color: #191f28;
+}
+.price {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+    font-size: 16px;
+    color: #fe7564;
+}
+.info {
+    width: 121px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2px;
+}
+.cardSmall {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.cardList {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 16px 12px;
+    font-size: 14px;
+    color: #3b4149;
+}
+.section {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0px 20px;
+    gap: 12px;
+}
+.div16 {
+    width: 252px;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.chevronRightIcon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.title1 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0px;
+}
+.img7 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 8px;
+    background-color: #d9d9d9;
+    width: 162px;
+    height: 162px;
+}
+.div17 {
+    position: absolute;
+    top: calc(50% - 10.15px);
+    left: calc(50% - 5.15px);
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 600;
+    display: inline-block;
+    width: 10px;
+}
+.rank {
+    position: absolute;
+    top: 8.1px;
+    left: 8.1px;
+    border-radius: 4px;
+    background-color: #666;
+    width: 22.3px;
+    height: 22.3px;
+}
+.img6 {
+    width: 162px;
+    position: relative;
+    height: 162px;
+}
+.div18 {
+    width: 163px;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 600;
+    display: inline-block;
+}
+.b {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+}
+.b1 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+    color: #191f28;
+}
+.price3 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+    font-size: 20px;
+    color: #fe7564;
+}
+.starIcon {
+    width: 12px;
+    position: relative;
+    max-height: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.div19 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 18px;
+    font-weight: 500;
+}
+.starParent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+    font-size: 12px;
+    color: #6b7684;
+}
+.info3 {
+    width: 162px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2px;
+    color: #3b4149;
+}
+.imgParent {
+    width: 163px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.cardList1 {
+    width: 338px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: #fff;
+}
+.img14 {
+    align-self: stretch;
+    position: relative;
+    border-radius: 8px;
+    background-color: #d9d9d9;
+    height: 152px;
+    z-index: 0;
+}
+.b8 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+    display: inline-block;
+    height: 19px;
+    flex-shrink: 0;
+}
+.nameChild {
+    width: 22px;
+    position: relative;
+    border-radius: 999px;
+    background-color: #d9d9d9;
+    height: 22px;
+}
+.div35 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+}
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    font-size: 14px;
+    color: #6b7684;
+}
+.info7 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    z-index: 1;
+}
+.heartIcon3 {
+    width: 16px;
+    position: absolute;
+    margin: 0 !important;
+    top: 9px;
+    left: 202px;
+    max-height: 100%;
+    overflow: hidden;
+    z-index: 2;
+}
+.cardLarge {
+    width: 228px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+    gap: 4px;
+}
+.cardList2 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+    color: #3b4149;
+}
+.section2 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0px 20px;
+    gap: 12px;
+}
+.contents {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 48px;
+    font-size: 20px;
+    color: #191f28;
+}
+.container {
+    position: absolute;
+    top: 202px;
+    left: 5px;
+    width: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 0px;
+    box-sizing: border-box;
+    gap: 20px;
+    font-size: 14px;
+}
+.chip4 {
+    border-radius: 999px;
+    background-color: #e8f9f2;
+    border: 1px solid #15c47e;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    color: #15c47e;
+}
+.chipGroup {
+    position: absolute;
+    top: 152px;
+    left: 0px;
+    width: 375px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 20px;
+    box-sizing: border-box;
+    gap: 8px;
+    color: #6b7684;
+}
+.tab {
+    border-bottom: 3px solid #3b4149;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0px;
+}
+.tab1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0px;
+    color: #bbc0c6;
+}
+.tabGroup1 {
+    position: absolute;
+    top: 98px;
+    left: 0px;
+    background-color: #fff;
+    border-bottom: 2px solid #f0f1f3;
+    box-sizing: border-box;
+    width: 375px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 20px;
+    gap: 16px;
+    color: #3b4149;
+}
+.vectorIcon {
+    position: absolute;
+    top: calc(50% - 7px);
+    left: calc(50% - 167.5px);
+    width: 84px;
+    height: 14px;
+}
+.shoppingCartIcon {
+    position: absolute;
+    top: 15px;
+    left: 291px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+.userIcon {
+    position: absolute;
+    top: 15px;
+    left: 331px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+.header {
+    position: absolute;
+    top: 44px;
+    left: 0px;
+    background-color: #fff;
+    width: 375px;
+    height: 54px;
+}
+.notch {
+    position: relative;
+    width: 0px;
+    height: 0px;
+}
+.batteryIcon {
+    position: absolute;
+    top: 0px;
+    right: 0.07px;
+    width: 24.3px;
+    height: 11.3px;
+}
+.wifiIcon {
+    position: relative;
+    width: 15.3px;
+    height: 11px;
+}
+.mobileSignalIcon {
+    position: relative;
+    width: 17px;
+    height: 10.7px;
+}
+.rightSide {
+    position: absolute;
+    top: 17.33px;
+    right: 14.63px;
+    width: 66.7px;
+    height: 11.3px;
+}
+.leftSideIcon {
+    position: absolute;
+    top: 12px;
+    left: 21px;
+    width: 54px;
+    height: 21px;
+}
+.iphoneXOrNewerlightdefa {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+    width: 375px;
+    height: 44px;
+    overflow: hidden;
+}
+.div {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1922px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 16px;
+    color: #fff;
+    font-family: Pretendard;
+}
+
