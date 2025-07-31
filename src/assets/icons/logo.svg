@@ -1,3 +1,14 @@
-<svg width="86" height="24" viewBox="0 0 86 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <text x="0" y="20" font-family="Arial, sans-serif" font-size="24" fill="black" font-weight="bold">Farm:Us</text>
+<svg viewBox="0 0 86 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  {/* 👇 textLength="86" 속성을 추가하여 텍스트가 viewBox 너비(86)를 넘어가지 않도록 강제합니다. */}
+  <text 
+    x="0" 
+    y="20" 
+    font-family="Arial, sans-serif" 
+    font-size="24" 
+    fill="#00AB55" 
+    font-weight="bold" 
+    textLength="86" 
+    lengthAdjust="spacingAndGlyphs">
+    Farm:Us
+  </text>
 </svg>

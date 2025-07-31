@@ -2,16 +2,17 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
-import StatusBar from '../assets/icons/StatusBar.svg?react';
 import Navigation from './Navigation'; 
 
 export default function Layout() {
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="bg-white max-w-2xl mx-auto font-sans">
+    // 👇 전체 화면을 중앙 정렬하기 위해 flex와 justify-center를 추가합니다.
+    <div className="bg-gray-100 min-h-screen flex justify-center">
+      {/* 👇 max-w-2xl을 w-[375px]로 변경하여 너비를 375px로 고정합니다. */}
+      <div className="bg-white w-[375px] font-sans shadow-lg"> {/* 그림자 효과 추가 */}
         <div className="sticky top-0 z-20 bg-white">
           <Header />
-       <Navigation /> {/* ✨ 이 부분의 주석을 제거하세요! */}
+          <Navigation />
         </div>
 
         <main>
