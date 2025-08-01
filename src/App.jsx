@@ -13,6 +13,7 @@ import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import MyPage from './pages/MyPage.jsx';
 import SellerMyPage from './pages/SellerMyPage.jsx';
+import ProductDetailRegistrationPage from './pages/ProductDetailRegistrationPage.jsx';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register-product" element={<ProductRegistrationPage />} />
+          <Route path="/register-product/detail" element={<ProductDetailRegistrationPage />} />
           <Route path="/product-registration-confirmation" element={<ProductRegistrationConfirmation />} />
         </Routes>
       </BrowserRouter>

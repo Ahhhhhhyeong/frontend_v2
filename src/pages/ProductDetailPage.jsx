@@ -1,28 +1,54 @@
 // src/pages/ProductDetailPage.jsx
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
 import { ChevronRightIcon, HeartIcon, StarIcon, ChevronLeftIcon } from '../components/Icons';
 
 export default function ProductDetailPage() {
     const { id } = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
     const [product, setProduct] = useState(null);
+    const [isPreview, setIsPreview] = useState(false);
 
     useEffect(() => {
-        // sessionStorage에서 상품 데이터를 가져옵니다.
-        const storedProduct = sessionStorage.getItem(`product-${id}`);
-        if (storedProduct) {
-            setProduct(JSON.parse(storedProduct));
+        // 미리보기 모드인 경우 location.state에서 데이터를 가져옴
+        if (location.state) {
+            setProduct(location.state);
+            setIsPreview(true);
         } else {
-            console.log('상품 데이터를 찾을 수 없습니다.');
-            // 임시 데이터로 대체하거나 에러 페이지로 리다이렉트할 수 있습니다.
-            // setProduct({...});
+            // 일반 상품 상세 페이지인 경우 sessionStorage에서 데이터를 가져옴
+            const storedProduct = sessionStorage.getItem(`product-${id}`);
+            if (storedProduct) {
+                setProduct(JSON.parse(storedProduct));
+            } else {
+                console.log('상품 데이터를 찾을 수 없습니다.');
+                // 임시 데이터
+                setProduct({
+                    id: 'temp-1',
+                    productName: '강원도 유기농 감자',
+                    mainImage: 'https://via.placeholder.com/400x300.png?text=Main+Image',
+                    description: 'GAP 인증을 받은 안전한 농산물입니다. 당일 수확하여 가장 신선한 상태로 보내드립니다.',
+                    detailImages: [
+                        'https://via.placeholder.com/400x300.png?text=Detail+Image+1',
+                        'https://via.placeholder.com/400x300.png?text=Detail+Image+2'
+                    ],
+                    price: '19,900원',
+                    brandName: '김준식 농부',
+                });
+            }
         }
-    }, [id]);
+    }, [id, location]);
 
     if (!product) {
         return <div>상품 정보를 불러오는 중...</div>;
     }
+
+    const handleRegister = () => {
+        const newProductId = Date.now();
+        sessionStorage.setItem(`product-${newProductId}`, JSON.stringify(product));
+        navigate(`/product-registration-confirmation?id=${newProductId}`);
+    };
 
     return (
         <div className={styles.div}>
@@ -38,7 +64,7 @@ export default function ProductDetailPage() {
                 <Link to="/">
                     <ChevronLeftIcon className={styles.chevronLeftIcon} />
                 </Link>
-                <div className={styles.div26}>상세 페이지</div>
+                <div className={styles.div26}>{isPreview ? '상품 등록 미리보기' : '상세 페이지'}</div>
             </div>
 
             {/* 상품 정보 및 탭 섹션 */}
@@ -60,7 +86,7 @@ export default function ProductDetailPage() {
                         </div>
                         <div className={styles.price}>
                             <b className={styles.b}>99%</b>
-                            <b className={styles.b1}>99,999원</b>
+                            <b className={styles.b1}>{product.price || '가격 미정'}</b>
                         </div>
                     </div>
                     <div className={styles.listParent}>
@@ -116,18 +142,26 @@ export default function ProductDetailPage() {
                 ))}
             </div>
 
-            {/* 하단 버튼 바 */}
-            <div className={styles.bottomButton}>
-                <HeartIcon className={styles.heartIcon} />
-                <div className={styles.buttonGroup}>
-                    <button className={styles.button}>
-                        <div className={styles.div19}>장바구니</div>
-                    </button>
-                    <button className={styles.button1}>
-                        <div className={styles.div19}>바로구매</div>
+            {/* 하단 버튼 바 (미리보기일 경우 다르게 표시) */}
+            {isPreview ? (
+                <div className={styles.bottomButton}>
+                    <button onClick={handleRegister} className="w-full px-6 py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600">
+                        이대로 등록하기
                     </button>
                 </div>
-            </div>
+            ) : (
+                <div className={styles.bottomButton}>
+                    <HeartIcon className={styles.heartIcon} />
+                    <div className={styles.buttonGroup}>
+                        <button className={styles.button}>
+                            <div className={styles.div19}>장바구니</div>
+                        </button>
+                        <button className={styles.button1}>
+                            <div className={styles.div19}>바로구매</div>
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
