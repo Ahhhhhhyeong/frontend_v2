@@ -1,0 +1,327 @@
+/* src/pages/ProductDetailPage.module.css */
+/* 이 파일은 Tailwind CSS와 함께 사용하도록 작성되었습니다. */
+
+.div {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    overflow: auto;
+    text-align: left;
+    font-size: 14px;
+    color: #3b4149;
+    font-family: Pretendard;
+}
+
+.img {
+    width: 100%;
+    height: 375px;
+    overflow: hidden;
+}
+
+.img1 {
+    width: 100%;
+    height: 100%;
+    background-color: #d9d9d9;
+}
+
+.header {
+    position: absolute;
+    top: 44px; /* StatusBar의 높이 이후 */
+    left: 0;
+    width: 100%;
+    height: 54px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.chevronLeftIcon {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 24px;
+    height: 24px;
+}
+
+.div26 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+/* 상품 정보 섹션 */
+.infoAndTab {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 20px 20px;
+    gap: 16px;
+}
+
+.brand {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+.brand1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
+}
+.brandChild {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background-color: #d9d9d9;
+}
+.div1 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+}
+.chevronRightIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.productInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+}
+.kg {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 26px;
+}
+.starParent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    color: #6a7685;
+}
+.starIcon {
+    width: 16px;
+    height: 16px;
+}
+.div2 {
+    letter-spacing: -0.02em;
+    line-height: 20px;
+}
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    color: #fe7564;
+}
+.b {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+}
+.b1 {
+    font-weight: 700;
+    color: #191f28;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+}
+.div4 {
+    display: none;
+    text-decoration: line-through;
+    color: #bac0c7;
+}
+
+.listParent {
+    width: 100%;
+    border: 1px solid #f0f1f3;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #6a7685;
+}
+.list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 43px;
+}
+.list5 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 42px;
+}
+.div5 {
+    width: 84px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+}
+.cj {
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    color: #3b4149;
+}
+.p {
+    margin: 0;
+}
+
+/* 탭 바 섹션 */
+.tabBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    color: #3b3b3b;
+    border-bottom: 1px solid #f0f1f3;
+}
+.tab, .tab1 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+}
+.tab {
+    border-bottom: 2px solid #3b4149;
+    color: #3b3b3b;
+}
+.tab1 {
+    gap: 4px;
+    color: #6a7685;
+}
+.div16 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 22px;
+}
+.div18 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 18px;
+    color: #6a7685;
+}
+
+/* 상품 상세 내용 섹션 */
+.div21 {
+    width: 100%;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    text-align: center;
+    font-size: 24px;
+    color: #095235;
+}
+.contents {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+.b2 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 140%;
+}
+.div22 {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 140%;
+    color: #3b4149;
+}
+.contentsChild {
+    width: 100%;
+    height: 375px;
+    background-color: #d9d9d9;
+}
+
+/* 하단 버튼 바 */
+.bottomButton {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 375px;
+    padding: 12px 20px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+.heartIcon {
+    width: 24px;
+    height: 24px;
+}
+.buttonGroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.button, .button1 {
+    width: 146px;
+    height: 52px;
+    border-radius: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+.button {
+    background-color: #e8f9f2;
+    color: #15c47e;
+}
+.button1 {
+    background-color: #15c47e;
+    color: #fff;
+}
+.div19 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 24px;
+    font-weight: 600;
+}

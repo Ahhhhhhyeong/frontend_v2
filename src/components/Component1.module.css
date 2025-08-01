@@ -1,0 +1,468 @@
+/* src/components/Component1.module.css */
+
+.div1 {
+    width: 148px;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 26px;
+    font-weight: 600;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.chevronRightIcon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.title {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0px;
+}
+.div2 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 22px;
+    font-weight: 500;
+}
+.div3 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 22px;
+}
+.countBar {
+    align-self: stretch;
+    position: relative;
+    border-radius: 4px;
+    background-color: #15c47e;
+    height: 90px;
+}
+.count {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+}
+.div4 {
+    align-self: stretch;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 500;
+    color: #6a7685;
+}
+.dayCount {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.countBar1 {
+    align-self: stretch;
+    position: relative;
+    border-radius: 4px;
+    background-color: #15c47e;
+    height: 4px;
+}
+.view {
+    align-self: stretch;
+    height: 172px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 16px 0px;
+    box-sizing: border-box;
+    gap: 20px;
+    text-align: center;
+}
+.parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    font-size: 16px;
+    color: #3b4149;
+}
+.analysis {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 8px 20px;
+    gap: 8px;
+}
+.divider {
+    align-self: stretch;
+    position: relative;
+    background-color: #f7f9fa;
+    height: 16px;
+}
+.div17 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 26px;
+    font-weight: 600;
+}
+.div19 {
+    width: 20px;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 500;
+    color: #15c47e;
+    text-align: center;
+    display: none;
+    flex-shrink: 0;
+}
+.title1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+}
+.option {
+    align-self: stretch;
+    background-color: #fff;
+    border-bottom: 1px solid #f0f1f3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0px;
+    gap: 0px;
+}
+.div21 {
+    width: 20px;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 500;
+    color: #15c47e;
+    text-align: center;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.optionList {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 16px;
+    color: #3b4149;
+}
+.div26 {
+    align-self: stretch;
+    position: relative;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    line-height: 26px;
+    font-weight: 600;
+    color: #191f28;
+}
+.optionList1 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.container {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 8px 20px;
+    gap: 8px;
+    font-size: 16px;
+    color: #3b4149;
+}
+.analysisParent {
+    position: absolute;
+    top: 401px;
+    left: 0px;
+    width: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.child {
+    position: absolute;
+    top: 301px;
+    left: -6px;
+    width: 375px;
+    height: 283px;
+}
+.item {
+    position: absolute;
+    top: 125px;
+    left: 25px;
+    border-radius: 999px;
+    background-color: #d9d9d9;
+    width: 48px;
+    height: 48px;
+}
+.div31 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+    font-weight: 600;
+}
+.div32 {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 600;
+}
+.name {
+    position: absolute;
+    top: 123px;
+    left: 86px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    font-size: 20px;
+}
+.div33 {
+    position: absolute;
+    top: 151px;
+    left: 86px;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+}
+.div34 {
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    font-weight: 500;
+}
+.button {
+    position: absolute;
+    top: 131px;
+    left: 255px;
+    border-radius: 8px;
+    background-color: #e8f9f2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #15c47e;
+}
+.materialSymbolsLightidCardIcon {
+    width: 28px;
+    position: relative;
+    max-height: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.div36 {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    line-height: 20px;
+    text-align: left;
+}
+.title7 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.titleIcon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+.titleIconWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.chevronRightIcon7 {
+    width: 16px;
+    position: relative;
+    height: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.card {
+    position: absolute;
+    top: 282px;
+    left: 20px;
+    border-radius: 12px;
+    background-color: #f7f9fa;
+    width: 334px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    box-sizing: border-box;
+    gap: 0px;
+    text-align: center;
+    font-size: 16px;
+    color: #3b4149;
+}
+.div37 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 28px;
+    font-weight: 600;
+}
+.div38 {
+    position: relative;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    line-height: 22px;
+    color: #3b4149;
+}
+.orderListTitle {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1px;
+}
+.frameChild {
+    width: 1px;
+    position: relative;
+    background-color: #e2e6e9;
+    height: 16px;
+}
+.orderListTitleParent {
+    position: absolute;
+    top: 206px;
+    left: 20px;
+    width: 335px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 28px;
+    box-sizing: border-box;
+    gap: 0px;
+    text-align: center;
+    font-size: 20px;
+    color: #15c47e;
+}
+.homeIcon {
+    position: absolute;
+    top: 15px;
+    left: 291px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+.settingsIcon {
+    position: absolute;
+    top: 15px;
+    left: 331px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+.div43 {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: calc(50% - 167.5px);
+    letter-spacing: -0.02em;
+    line-height: 26px;
+    font-weight: 500;
+    display: inline-block;
+    width: 184px;
+}
+.header {
+    position: absolute;
+    top: 44px;
+    left: 0px;
+    width: 375px;
+    height: 54px;
+    color: #3b4149;
+}
+.notch {
+    position: relative;
+    width: 0px;
+    height: 0px;
+}
+.batteryIcon {
+    position: absolute;
+    top: 0px;
+    right: 0.07px;
+    width: 24.3px;
+    height: 11.3px;
+}
+.wifiIcon {
+    position: relative;
+    width: 15.3px;
+    height: 11px;
+}
+.mobileSignalIcon {
+    position: relative;
+    width: 17px;
+    height: 10.7px;
+}
+.rightSide {
+    position: absolute;
+    top: 17.33px;
+    right: 14.63px;
+    width: 66.7px;
+    height: 11.3px;
+}
+.leftSideIcon {
+    position: absolute;
+    top: 12px;
+    left: 21px;
+    width: 54px;
+    height: 21px;
+}
+.iphoneXOrNewerlightdefa {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 375px;
+    height: 44px;
+    overflow: hidden;
+}
+.div {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1212px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 18px;
+    color: #191f28;
+    font-family: Pretendard;
+}
