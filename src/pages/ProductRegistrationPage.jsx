@@ -1,14 +1,10 @@
 // src/pages/ProductRegistrationPage.jsx
-// 사용자가 상품 정보를 입력하고 이미지를 등록할 수 있도록 돕는 상품 등록 페이지입니다.
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CheckCircleIcon } from '../components/Icons'; // 상품 등록 완료 페이지에서 사용할 아이콘
+import { CheckCircleIcon } from '../components/Icons'; 
 
-// --- 아이콘 컴포넌트 ---
 const ArrowLeftIcon = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>;
 
-// --- 자동 완성 및 템플릿 데이터 ---
 const categorySuggestions = {
     '딸기': ['과일', '농산물'],
     '감자': ['채소', '구황작물', '농산물'],
@@ -25,28 +21,24 @@ const descriptionTemplates = [
     "꼼꼼하게 선별하여 최상품만 보내드립니다.",
 ];
 
-// --- 컴포넌트 ---
 export default function ProductRegistrationPage() {
     const navigate = useNavigate();
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [suggestedCategories, setSuggestedCategories] = useState([]);
-    const [mainImage, setMainImage] = useState(null); // 대표 이미지 파일 상태
-    const [detailImages, setDetailImages] = useState([]); // 상세 이미지 파일 배열 상태
+    const [mainImage, setMainImage] = useState(null);
+    const [detailImages, setDetailImages] = useState([]);
 
     useEffect(() => {
-        // 상품 이름에 따라 추천 카테고리 업데이트
         const keyword = Object.keys(categorySuggestions).find(key => productName.includes(key));
         setSuggestedCategories(keyword ? categorySuggestions[keyword] : []);
     }, [productName]);
 
     const addDescriptionTemplate = (template) => {
-        // 상품 설명 템플릿 추가
         setDescription(prev => prev ? `${prev}\n${template}` : template);
     };
 
     const handleMainImageChange = (event) => {
-        // 대표 이미지 파일 선택 시 상태 업데이트
         const file = event.target.files[0];
         if (file) {
             setMainImage(file);
@@ -54,7 +46,6 @@ export default function ProductRegistrationPage() {
     };
 
     const handleDetailImageChange = (event) => {
-        // 상세 이미지 파일 선택 시 상태 업데이트 (다중 선택 가능)
         const files = Array.from(event.target.files);
         if (files && detailImages.length + files.length <= 4) {
             setDetailImages(prevImages => [...prevImages, ...files]);
@@ -64,20 +55,25 @@ export default function ProductRegistrationPage() {
     };
 
     const handleSubmit = () => {
-        // '완료' 버튼 클릭 시 상품 정보와 이미지 정보를 콘솔에 출력 (실제 등록 로직은 API 호출 등을 통해 구현)
-        console.log('상품 등록 요청:', {
-            productName,
-            description,
-            mainImage: mainImage ? mainImage.name : null,
-            detailImages: detailImages.map(file => file.name),
-        });
-        // 실제 API 호출 후 성공하면 다음 페이지로 이동 (현재는 콘솔 출력만)
-        navigate('/product-registration-confirmation');
+        // 임시로 상품 ID를 생성합니다.
+        const newProductId = Date.now();
+        // 등록된 상품 데이터를 세션 스토리지에 저장합니다. (페이지 이동 후에도 데이터 유지)
+        sessionStorage.setItem(
+            `product-${newProductId}`,
+            JSON.stringify({
+                id: newProductId,
+                productName,
+                description,
+                mainImage: mainImage ? URL.createObjectURL(mainImage) : null,
+                detailImages: detailImages.map(file => URL.createObjectURL(file)),
+            })
+        );
+        // 등록 완료 페이지로 이동
+        navigate(`/product-registration-confirmation?id=${newProductId}`);
     };
 
     return (
         <div className="bg-gray-50 min-h-screen font-sans">
-            {/* 상단 헤더 */}
             <div className="sticky top-0 bg-white z-10 flex justify-between items-center p-3 border-b w-[375px] mx-auto">
                 <Link to="/"><ArrowLeftIcon /></Link>
                 <span className="font-bold text-lg">상품 등록</span>
@@ -85,7 +81,6 @@ export default function ProductRegistrationPage() {
             </div>
 
             <div className="p-4 space-y-6 max-w-2xl mx-auto w-[375px]">
-                {/* 상품명 입력 섹션 */}
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                     <label className="text-sm font-semibold text-gray-700">상품 이름</label>
                     <input
@@ -109,8 +104,6 @@ export default function ProductRegistrationPage() {
                         </div>
                     )}
                 </div>
-
-                {/* 대표 이미지 등록 섹션 */}
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                     <label className="text-sm font-semibold text-gray-700">대표 이미지 등록</label>
                     <div className="w-full h-48 mt-2 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center text-gray-400 cursor-pointer relative">
@@ -129,8 +122,6 @@ export default function ProductRegistrationPage() {
                         가로가 긴 3:2 비율의 이미지, 주목도가 높은 선명한 이미지, 제공할 상품과 연관된 이미지
                     </p>
                 </div>
-
-                {/* 상품 설명 입력 섹션 */}
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                     <label className="text-sm font-semibold text-gray-700">상품 설명</label>
                     <textarea
@@ -154,8 +145,6 @@ export default function ProductRegistrationPage() {
                         </div>
                     </div>
                 </div>
-
-                {/* 상세 정보 입력 (이미지 추가 기능) */}
                 <div className="bg-white p-4 rounded-lg shadow-sm space-y-4">
                     <h4 className="text-sm font-semibold text-gray-700">상세 정보 등록 (최대 4장)</h4>
                     <div className="w-full h-24 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center text-gray-400 cursor-pointer relative">
@@ -167,7 +156,6 @@ export default function ProductRegistrationPage() {
                             {detailImages.map((image, index) => (
                                 <div key={index} className="relative">
                                     <img src={URL.createObjectURL(image)} alt={`상세 이미지 ${index + 1}`} className="w-full h-32 object-cover rounded-md" />
-                                    {/* 필요하다면 삭제 버튼 추가 */}
                                 </div>
                             ))}
                         </div>

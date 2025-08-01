@@ -1,6 +1,4 @@
 // src/App.jsx
-// 앱의 전체 레이아웃과 페이지 경로를 관리하는 최상위 컴포넌트입니다.
-
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CommunityProvider } from './context/CommunityContext';
@@ -18,11 +16,9 @@ import SellerMyPage from './pages/SellerMyPage.jsx';
 
 export default function App() {
   return (
-    // CommunityProvider로 앱 전체의 상태를 관리합니다.
     <CommunityProvider>
       <BrowserRouter>
         <Routes>
-          {/* Layout을 사용하는 모든 페이지들을 하나의 부모 Route 안에 묶습니다. */}
           <Route element={<Layout />}>
             <Route path="/" element={<MainPage />} />
             <Route path="/community" element={<CommunityPage />} />
@@ -31,7 +27,6 @@ export default function App() {
             <Route path="/product-detail/:id" element={<ProductDetailPage />} />
           </Route>
 
-          {/* Layout이 없는 독립적인 페이지들 */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register-product" element={<ProductRegistrationPage />} />
           <Route path="/product-registration-confirmation" element={<ProductRegistrationConfirmation />} />
