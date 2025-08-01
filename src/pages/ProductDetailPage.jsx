@@ -9,36 +9,20 @@ export default function ProductDetailPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
-    const [isPreview, setIsPreview] = useState(false);
+    const isPreview = location.pathname.includes('/preview');
 
     useEffect(() => {
-        // 미리보기 모드인 경우 location.state에서 데이터를 가져옴
-        if (location.state) {
+        if (isPreview) {
             setProduct(location.state);
-            setIsPreview(true);
         } else {
-            // 일반 상품 상세 페이지인 경우 sessionStorage에서 데이터를 가져옴
             const storedProduct = sessionStorage.getItem(`product-${id}`);
             if (storedProduct) {
                 setProduct(JSON.parse(storedProduct));
             } else {
                 console.log('상품 데이터를 찾을 수 없습니다.');
-                // 임시 데이터
-                setProduct({
-                    id: 'temp-1',
-                    productName: '강원도 유기농 감자',
-                    mainImage: 'https://via.placeholder.com/400x300.png?text=Main+Image',
-                    description: 'GAP 인증을 받은 안전한 농산물입니다. 당일 수확하여 가장 신선한 상태로 보내드립니다.',
-                    detailImages: [
-                        'https://via.placeholder.com/400x300.png?text=Detail+Image+1',
-                        'https://via.placeholder.com/400x300.png?text=Detail+Image+2'
-                    ],
-                    price: '19,900원',
-                    brandName: '김준식 농부',
-                });
             }
         }
-    }, [id, location]);
+    }, [id, isPreview, location.state]);
 
     if (!product) {
         return <div>상품 정보를 불러오는 중...</div>;
@@ -61,7 +45,7 @@ export default function ProductDetailPage() {
 
             {/* 헤더 */}
             <div className={styles.header}>
-                <Link to="/">
+                <Link to={isPreview ? '/register-product/detail' : '/'}>
                     <ChevronLeftIcon className={styles.chevronLeftIcon} />
                 </Link>
                 <div className={styles.div26}>{isPreview ? '상품 등록 미리보기' : '상세 페이지'}</div>

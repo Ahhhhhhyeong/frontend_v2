@@ -1,30 +1,18 @@
 // src/pages/ProductDetailRegistrationPage.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { CheckCircleIcon } from '../components/Icons';
-
-const ArrowLeftIcon = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>;
-
-const descriptionTemplates = [
-    "GAP 인증을 받은 안전한 농산물입니다.",
-    "화학 비료 대신 유기농 퇴비를 사용하여 정성껏 키웠습니다.",
-    "당일 수확하여 가장 신선한 상태로 보내드립니다.",
-    "산지 직송으로 유통 과정을 최소화했습니다.",
-    "꼼꼼하게 선별하여 최상품만 보내드립니다.",
-];
+import styles from './ProductDetailRegistrationPage.module.css';
+import { ChevronLeftIcon, ChevronBottomIcon, CameraIcon, TrashIcon } from '../components/Icons';
 
 export default function ProductDetailRegistrationPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { productName, mainImage } = location.state || {};
+    const initialProductData = location.state || {};
 
+    // 상태 관리
     const [description, setDescription] = useState('');
     const [detailImages, setDetailImages] = useState([]);
-    const [price, setPrice] = useState('');
-
-    const addDescriptionTemplate = (template) => {
-        setDescription(prev => prev ? `${prev}\n${template}` : template);
-    };
+    const [options, setOptions] = useState([{ name: '', value: '', price: '' }]);
 
     const handleDetailImageChange = (event) => {
         const files = Array.from(event.target.files);
@@ -35,108 +23,192 @@ export default function ProductDetailRegistrationPage() {
         }
     };
 
+    const handleAddOption = () => {
+        if (options.length < 10) {
+            setOptions([...options, { name: '', value: '', price: '' }]);
+        }
+    };
+
+    const handleOptionChange = (index, field, value) => {
+        const newOptions = [...options];
+        newOptions[index][field] = value;
+        setOptions(newOptions);
+    };
+
+    const handleRemoveOption = (index) => {
+        const newOptions = options.filter((_, i) => i !== index);
+        setOptions(newOptions);
+    };
+
     const handlePreview = () => {
         const productData = {
-            productName,
-            mainImage,
+            ...initialProductData,
             description,
             detailImages: detailImages.map(file => URL.createObjectURL(file)),
-            price: price,
-            // 기타 정보 (예시)
-            brandName: "농부 이름 (예시)",
+            options,
+            // 임시 데이터 추가
+            brandName: "새벽들딸기농원",
+            rating: "5.0",
+            reviews: "999+",
         };
         // 미리보기 페이지로 데이터를 전달하며 이동
         navigate('/product-detail/preview', { state: productData });
     };
 
     const handleSubmit = () => {
-        if (!description || detailImages.length === 0 || !price) {
-            alert('상품 설명, 상세 이미지, 가격은 필수 항목입니다.');
-            return;
-        }
-        
-        // 상품 ID를 생성합니다.
         const newProductId = Date.now();
-        // 등록된 상품 데이터를 세션 스토리지에 저장합니다.
-        sessionStorage.setItem(
-            `product-${newProductId}`,
-            JSON.stringify({
-                id: newProductId,
-                productName,
-                mainImage,
-                description,
-                detailImages: detailImages.map(file => URL.createObjectURL(file)),
-                price: price,
-                // 기타 정보 (예시)
-                brandName: "김준식 농부",
-            })
-        );
-        // 등록 완료 페이지로 이동
+        const productData = {
+            ...initialProductData,
+            description,
+            detailImages: detailImages.map(file => URL.createObjectURL(file)),
+            options,
+            // 임시 데이터 추가
+            brandName: "새벽들딸기농원",
+            rating: "5.0",
+            reviews: "999+",
+        };
+        sessionStorage.setItem(`product-${newProductId}`, JSON.stringify(productData));
         navigate(`/product-registration-confirmation?id=${newProductId}`);
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen font-sans">
-            <div className="sticky top-0 bg-white z-10 flex justify-between items-center p-3 border-b w-[375px] mx-auto">
-                <Link to="/register-product"><ArrowLeftIcon /></Link>
-                <span className="font-bold text-lg">상품 등록</span>
-                <button onClick={handleSubmit} className="font-bold text-lg text-green-500">완료</button>
+        <div className={styles.div}>
+            <div className={styles.header}>
+                <Link to="/register-product"><ChevronLeftIcon className={styles.chevronLeftIcon} /></Link>
+                <div className={styles.div117}>상품 등록</div>
+                <button onClick={handleSubmit} className={styles.div118}>등록하기</button>
             </div>
 
-            <div className="p-4 space-y-6 max-w-2xl mx-auto w-[375px]">
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <label className="text-sm font-semibold text-gray-700">상품 설명</label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        placeholder="상품에 대한 이야기를 들려주세요."
-                        className="w-full h-32 mt-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                    <div className="mt-3">
-                        <p className="text-xs text-gray-500 mb-2">자주 쓰는 문구를 추가해보세요!</p>
-                        <div className="flex flex-wrap gap-2">
-                            {descriptionTemplates.map((template, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => addDescriptionTemplate(template)}
-                                    className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-md hover:bg-gray-200"
-                                >
-                                    + {template}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <label className="text-sm font-semibold text-gray-700">상세 이미지 등록 (최대 4장)</label>
-                    <div className="w-full h-24 mt-2 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center text-gray-400 cursor-pointer relative">
-                        <span className="text-lg">+ 상세 이미지 추가</span>
-                        <input type="file" accept="image/*" multiple className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={handleDetailImageChange} />
-                    </div>
-                    {detailImages.length > 0 && (
-                        <div className="grid grid-cols-2 gap-2 mt-2">
-                            {detailImages.map((image, index) => (
-                                <div key={index} className="relative">
-                                    <img src={URL.createObjectURL(image)} alt={`상세 이미지 ${index + 1}`} className="w-full h-32 object-cover rounded-md" />
+            <div className={styles.contentParent}>
+                <div className={styles.content}>
+                    <div className={styles.div2}>상세 정보 등록</div>
+                    <div className={styles.parent}>
+                        <div className={styles.div3}>
+                            <div className={styles.title}>
+                                <div className={styles.div4}>상품 상세 설명을 적어주세요</div>
+                                <div className={styles.div5}>*</div>
+                            </div>
+                            <div className={styles.tip1}>
+                                <div className={styles.title10}>
+                                    <div className={styles.chip}>
+                                        <div className={styles.div12}>추천</div>
+                                    </div>
+                                    <div className={styles.div13}>아래 내용을 포함해 주세요!</div>
                                 </div>
-                            ))}
+                                <div className={styles.div60}>
+                                    <ul className={styles.ul}>
+                                        <li>소비자들이 자주 묻는 질문은 어떤게 있나요?</li>
+                                        <li>배송 정보는 어떻게 되나요?</li>
+                                        <li>상품을 더 맛있게 먹는 방법이 있나요?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={styles.textCount}>
+                                <textarea
+                                    className={styles.textarea}
+                                    placeholder="상품에 대한 이야기를 들려주세요."
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    maxLength={500}
+                                />
+                                <div className={styles.count}>
+                                    <div className={styles.div25}>{description.length}</div>
+                                    <div className={styles.div15}>/500자</div>
+                                </div>
+                            </div>
                         </div>
-                    )}
+                        {/* 상세 이미지 등록 */}
+                        <div className={styles.div3}>
+                            <div className={styles.title}>
+                                <div className={styles.div4}>상세 이미지를 올려주세요</div>
+                                <div className={styles.div5}>*</div>
+                            </div>
+                            <div className={styles.tip1}>
+                                <div className={styles.title10}>
+                                    <div className={styles.chip}>
+                                        <div className={styles.div12}>추천</div>
+                                    </div>
+                                    <div className={styles.div13}>이런 사진이 좋아요!</div>
+                                </div>
+                                <div className={styles.div60}>
+                                    <ul className={styles.ul}>
+                                        <li>상품을 더 자세히 보여주는 다양한 각도의 사진</li>
+                                        <li>상품의 특징을 강조하는 확대 사진</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={styles.imgUpload}>
+                                <div className={styles.imgUploadChild} />
+                                <div className={styles.imgInfo}>
+                                    <CameraIcon className={styles.bxscameraIcon} />
+                                    <div className={styles.div16}>사진 올리기</div>
+                                    <div className={styles.div17}>{detailImages.length}장 / 최대 4장</div>
+                                </div>
+                                <input type="file" accept="image/*" multiple className={styles.fileInput} onChange={handleDetailImageChange} />
+                            </div>
+                            {detailImages.length > 0 && (
+                                <div className="grid grid-cols-2 gap-2 mt-2">
+                                    {detailImages.map((image, index) => (
+                                        <div key={index} className="relative">
+                                            <img src={URL.createObjectURL(image)} alt={`상세 이미지 ${index + 1}`} className="w-full h-32 object-cover rounded-md" />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <label className="text-sm font-semibold text-gray-700">가격</label>
-                    <input
-                        type="number"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        placeholder="판매 가격을 입력해주세요."
-                        className="w-full mt-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
+
+                <div className={styles.content}>
+                    <div className={styles.div2}>옵션 설정</div>
+                    <div className={styles.parent}>
+                        {options.map((option, index) => (
+                            <div key={index} className={styles.optionItem}>
+                                <div className={styles.title12}>
+                                    <div className={styles.div72}>옵션 {index + 1}</div>
+                                    <button onClick={() => handleRemoveOption(index)}>
+                                        <TrashIcon className={styles.chevronBottomIcon} />
+                                    </button>
+                                </div>
+                                <div className={styles.optionFields}>
+                                    <input
+                                        type="text"
+                                        placeholder="옵션명 (예: 무게, 개수)"
+                                        value={option.name}
+                                        onChange={(e) => handleOptionChange(index, 'name', e.target.value)}
+                                        className={styles.textInput1}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="옵션값 (예: 1kg, 3개입)"
+                                        value={option.value}
+                                        onChange={(e) => handleOptionChange(index, 'value', e.target.value)}
+                                        className={styles.textInput1}
+                                    />
+                                    <input
+                                        type="number"
+                                        placeholder="가격 (예: 15000)"
+                                        value={option.price}
+                                        onChange={(e) => handleOptionChange(index, 'price', e.target.value)}
+                                        className={styles.textInput1}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                        <button onClick={handleAddOption} className={styles.iconButton}>
+                            <div className={styles.div116}>옵션 추가하기</div>
+                        </button>
+                    </div>
                 </div>
-                <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
-                    <button onClick={handlePreview} className="text-blue-500 font-bold">상품 미리보기</button>
-                    <button onClick={handleSubmit} className="px-6 py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600">등록 완료</button>
-                </div>
+            </div>
+
+            <div className={styles.bottomButton}>
+                <button onClick={handlePreview} className={styles.previewButton}>
+                    <div className={styles.div116}>미리보기</div>
+                </button>
+                <button onClick={handleSubmit} className={styles.registerButton}>
+                    <div className={styles.div116}>등록하기</div>
+                </button>
             </div>
         </div>
     );

@@ -1,28 +1,23 @@
 // src/pages/ProductRegistrationPage.jsx
-import React, { useState, useEffect } from 'react';
+// 사용자가 상품 정보를 입력하고 이미지를 등록할 수 있도록 돕는 상품 등록 페이지입니다.
+
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CheckCircleIcon } from '../components/Icons';
-
-const ArrowLeftIcon = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>;
-
-const categorySuggestions = {
-    '딸기': ['과일', '농산물'],
-    '감자': ['채소', '구황작물', '농산물'],
-    '수박': ['과일', '여름과일'],
-    '옥수수': ['채소', '농산물'],
-    '사과': ['과일'],
-};
+import styles from './ProductRegistrationPage.module.css';
+import { ArrowLeftIcon, ChevronLeftIcon, ChevronBottomIcon, CameraIcon } from '../components/Icons';
 
 export default function ProductRegistrationPage() {
     const navigate = useNavigate();
     const [productName, setProductName] = useState('');
     const [mainImage, setMainImage] = useState(null);
-    const [suggestedCategories, setSuggestedCategories] = useState([]);
+    const [category, setCategory] = useState(''); // 선택된 카테고리를 저장하는 상태
+    const [marketName, setMarketName] = useState('새벽들딸기농원');
+    const [farmerName, setFarmerName] = useState('김준식');
+    const [career, setCareer] = useState('');
+    const [cultivation, setCultivation] = useState('');
+    const [description, setDescription] = useState('');
 
-    useEffect(() => {
-        const keyword = Object.keys(categorySuggestions).find(key => productName.includes(key));
-        setSuggestedCategories(keyword ? categorySuggestions[keyword] : []);
-    }, [productName]);
+    const categories = ['과일', '채소', '축산', '수산', '김치/젓갈', '쌀/잡곡'];
 
     const handleMainImageChange = (event) => {
         const file = event.target.files[0];
@@ -32,70 +27,185 @@ export default function ProductRegistrationPage() {
     };
 
     const handleNext = () => {
-        if (!productName || !mainImage) {
-            alert('상품 이름과 대표 이미지는 필수 항목입니다.');
+        // 모든 필수 항목이 채워졌는지 확인하는 로직 추가
+        if (!productName || !mainImage || !category) {
+            alert('상품 카테고리, 대표 이미지, 상품명은 필수 항목입니다.');
             return;
         }
 
         const productData = {
             productName,
             mainImage: mainImage ? URL.createObjectURL(mainImage) : null,
+            category,
+            marketName,
+            farmerName,
+            career,
+            cultivation,
+            description,
         };
-        // 다음 페이지로 데이터를 전달하면서 이동합니다.
-        // 현재는 navigate의 state를 사용하며, 필요시 sessionStorage 등으로 변경 가능합니다.
+
+        // 다음 페이지로 데이터를 전달하며 이동
         navigate('/register-product/detail', { state: productData });
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen font-sans">
-            <div className="sticky top-0 bg-white z-10 flex justify-between items-center p-3 border-b w-[375px] mx-auto">
-                <Link to="/"><ArrowLeftIcon /></Link>
-                <span className="font-bold text-lg">상품 등록</span>
-                <button onClick={handleNext} className="font-bold text-lg text-green-500">다음</button>
+        <div className={styles.div}>
+            {/* 상단 헤더 */}
+            <div className={styles.header}>
+                <Link to="/"><ChevronLeftIcon className={styles.chevronLeftIcon} /></Link>
+                <div className={styles.div117}>상품 등록</div>
+                <button onClick={handleNext} className={styles.div118}>다음</button>
             </div>
 
-            <div className="p-4 space-y-6 max-w-2xl mx-auto w-[375px]">
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <label className="text-sm font-semibold text-gray-700">상품 이름</label>
-                    <input
-                        type="text"
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        placeholder="예) 강원도 유기농 감자"
-                        className="w-full mt-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    />
-                    {suggestedCategories.length > 0 && (
-                        <div className="mt-3">
-                            <p className="text-xs text-gray-500 mb-2">추천 카테고리</p>
-                            <div className="flex flex-wrap gap-2">
-                                {suggestedCategories.map(cat => (
-                                    <button key={cat} className="flex items-center space-x-1 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">
-                                        <CheckCircleIcon className="w-5 h-5" />
-                                        <span>{cat}</span>
-                                    </button>
-                                ))}
+            <div className={styles.contentParent}>
+                {/* 기본 정보 등록 섹션 */}
+                <div className={styles.content}>
+                    <div className={styles.div2}>기본 정보 등록</div>
+                    <div className={styles.parent}>
+                        {/* 상품 카테고리 선택 */}
+                        <div className={styles.div3}>
+                            <div className={styles.title}>
+                                <div className={styles.div4}>상품 카테고리를 선택해 주세요</div>
+                                <div className={styles.div5}>*</div>
+                            </div>
+                            <div className={styles.textInput}>
+                                <select
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                    className={styles.selectInput}
+                                >
+                                    <option value="" disabled>상품 카테고리를 선택해 주세요</option>
+                                    {categories.map((cat) => (
+                                        <option key={cat} value={cat}>
+                                            {cat}
+                                        </option>
+                                    ))}
+                                </select>
+                                <ChevronBottomIcon className={styles.chevronBottomIcon} />
                             </div>
                         </div>
-                    )}
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <label className="text-sm font-semibold text-gray-700">대표 이미지 등록</label>
-                    <div className="w-full h-48 mt-2 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center text-gray-400 cursor-pointer relative">
-                        {mainImage ? (
-                            <img src={URL.createObjectURL(mainImage)} alt="대표 이미지 미리보기" className="w-full h-full object-cover rounded-md" />
-                        ) : (
-                            <>
-                                <span className="text-lg">+</span>
-                                <input type="file" accept="image/*" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onChange={handleMainImageChange} />
-                            </>
-                        )}
+                        {/* 대표 이미지 등록 */}
+                        <div className={styles.div3}>
+                            <div className={styles.title}>
+                                <div className={styles.div4}>대표 이미지를 올려주세요</div>
+                                <div className={styles.div5}>*</div>
+                            </div>
+                            <div className={styles.tip}>
+                                <div className={styles.title2}>
+                                    <div className={styles.chip}>
+                                        <div className={styles.div12}>추천</div>
+                                    </div>
+                                    <div className={styles.div13}>이런 사진이 좋아요!</div>
+                                </div>
+                                <div className={styles.gapContainer}>
+                                    <ul className={styles.ul}>
+                                        <li>저화질, 초점이 나간 이미지는 피해주세요</li>
+                                        <li>상품을 잘 나타내는 직관적인 이미지를 선택해주세요</li>
+                                        <li>배경은 너무 어둡지 않게 촬영해주세요</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={styles.imgUpload}>
+                                {mainImage ? (
+                                    <img src={URL.createObjectURL(mainImage)} alt="대표 이미지" className={styles.imgUploadChild} />
+                                ) : (
+                                    <>
+                                        <div className={styles.imgUploadChild} />
+                                        <div className={styles.imgInfo}>
+                                            <CameraIcon className={styles.bxscameraIcon} />
+                                            <div className={styles.div16}>사진 올리기</div>
+                                            <div className={styles.div17}>대표사진을 올려주세요</div>
+                                        </div>
+                                    </>
+                                )}
+                                <input type="file" accept="image/*" className={styles.fileInput} onChange={handleMainImageChange} />
+                            </div>
+                        </div>
+                        {/* 상품명 작성 */}
+                        <div className={styles.div3}>
+                            <div className={styles.title}>
+                                <div className={styles.div4}>상품명을 작성해주세요</div>
+                                <div className={styles.div5}>*</div>
+                            </div>
+                            <div className={styles.tip1}>
+                                <div className={styles.title2}>
+                                    <div className={styles.chip}>
+                                        <div className={styles.div12}>추천</div>
+                                    </div>
+                                    <div className={styles.div13}>이런 이름이 좋아요!</div>
+                                </div>
+                                <div className={styles.gapContainer}>
+                                    <ul className={styles.ul}>
+                                        <li>식품 인증을 강조한 이름 예) GAP 인증</li>
+                                        <li>지역, 제철을 강조한 이름 예) 경북 햇 사과, 부서 꿀사과</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={styles.textInputParent}>
+                                <input
+                                    className={styles.textInput1}
+                                    type="text"
+                                    placeholder="상품명을 입력해주세요"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}
+                                    maxLength={20}
+                                />
+                                <div className={styles.group}>
+                                    <div className={styles.div25}>{productName.length}</div>
+                                    <div className={styles.div15}>/20자</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p className="mt-2 text-xs text-gray-500">
-                        TIP 이런 사진이 좋아요!
-                        <br/>
-                        가로가 긴 3:2 비율의 이미지, 주목도가 높은 선명한 이미지, 제공할 상품과 연관된 이미지
-                    </p>
                 </div>
+
+                {/* 상세 정보 등록 섹션 */}
+                <div className={styles.content}>
+                    <div className={styles.div2}>상세 정보 등록</div>
+                    <div className={styles.div54}>
+                        <div className={styles.div3}>
+                            <div className={styles.title}>
+                                <div className={styles.div4}>상품 상세 설명을 적어주세요</div>
+                                <div className={styles.div5}>*</div>
+                            </div>
+                            <div className={styles.tip1}>
+                                <div className={styles.title10}>
+                                    <div className={styles.chip}>
+                                        <div className={styles.div12}>추천</div>
+                                    </div>
+                                    <div className={styles.div13}>아래 내용을 포함해 주세요!</div>
+                                </div>
+                                <div className={styles.div60}>
+                                    <ul className={styles.ul}>
+                                        <li>소비자들이 자주 묻는 질문은 어떤게 있나요?</li>
+                                        <li>배송 정보는 어떻게 되나요?</li>
+                                        <li>상품을 더 맛있게 먹는 방법이 있나요?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={styles.textCount}>
+                                <textarea
+                                    className={styles.textarea}
+                                    placeholder="상품에 대한 이야기를 들려주세요."
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    maxLength={500}
+                                />
+                                <div className={styles.count}>
+                                    <div className={styles.div25}>{description.length}</div>
+                                    <div className={styles.div15}>/500자</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* 하단 버튼 */}
+            <div className={styles.bottomButton}>
+                <button onClick={handleNext} className={styles.button}>
+                    <div className={styles.div1}>다음</div>
+                </button>
             </div>
         </div>
     );
