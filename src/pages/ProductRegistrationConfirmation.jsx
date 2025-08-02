@@ -1,37 +1,20 @@
-// src/pages/ProductRegistrationConfirmation.jsx
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { CheckCircleIcon } from '../components/Icons';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './ProductRegistrationConfirmation.module.css';
+
+// 아이콘
+const CheckCircleIcon = () => ( <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#15C47E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg> );
 
 export default function ProductRegistrationConfirmation() {
-    const location = useLocation();
-    const [productId, setProductId] = useState(null);
-
-    useEffect(() => {
-        // URL에서 상품 ID를 가져옵니다.
-        const queryParams = new URLSearchParams(location.search);
-        const id = queryParams.get('id');
-        if (id) {
-            setProductId(id);
-        }
-    }, [location]);
-
+    const navigate = useNavigate();
     return (
-        <div className="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-4">
-            <CheckCircleIcon className="w-24 h-24 text-green-500" />
-            <h2 className="mt-6 text-2xl font-bold text-gray-900">상품 등록 완료!</h2>
-            <p className="mt-2 text-center text-gray-600">
-                상품이 성공적으로 등록되었습니다.<br />
-                관리자 확인 후 판매가 시작됩니다.
-            </p>
-            {productId && (
-                <Link to={`/seller-market`} className="mt-4 px-8 py-3 bg-blue-500 rounded-lg text-white font-bold transition hover:bg-blue-600">
-                    등록한 상품 확인하기
-                </Link>
-            )}
-            <Link to="/" className="mt-4 px-8 py-3 bg-green-500 rounded-lg text-white font-bold transition hover:bg-green-600">
-                메인 페이지로 돌아가기
-            </Link>
+        <div className={styles.container}>
+            <CheckCircleIcon />
+            <h1 className={styles.title}>상품 등록 완료!</h1>
+            <p className={styles.message}>내 판매자 마켓에서 등록된 상품을 확인해보세요.</p>
+            <button onClick={() => navigate('/seller-market')} className={styles.button}>
+                확인
+            </button>
         </div>
     );
 }

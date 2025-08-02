@@ -1,4 +1,6 @@
-/* Figma CSS를 기반으로 재구성 및 정리 */
+/* ProductDetailPage.module.css 파일의 스타일을 그대로 사용합니다. */
+/* 필요에 따라 Preview 페이지에만 적용할 스타일을 추가할 수 있습니다. */
+
 .div { width: 100%; position: relative; background-color: #fff; font-family: 'Pretendard', sans-serif; display: flex; flex-direction: column; align-items: center; }
 .header { position: fixed; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; width: 100%; height: 54px; background-color: #fff; padding: 0 16px; border-bottom: 1px solid #f0f1f3; }
 .headerButton { background: none; border: none; cursor: pointer; padding: 0; }
@@ -29,10 +31,3 @@
 .contentsChild { width: 100%; aspect-ratio: 375/280; object-fit: cover; border-radius: 8px; }
 .b2 { font-size: 18px; font-weight: 600; color: #191f28; line-height: 25px; }
 .div22 { font-size: 16px; color: #3b4149; line-height: 24px; white-space: pre-line; }
-
-.bottomButton { position: fixed; bottom: 0; left: 0; right: 0; background-color: #fff; border-top: 1px solid #f0f1f3; padding: 16px; display: flex; align-items: center; justify-content: space-between; }
-.buttonGroup { display: flex; }
-.button, .button1 { width: 167px; height: 52px; border-radius: 16px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.button { background-color: #f0f1f3; color: #3b4149; margin-right: 8px; }
-.button1 { background-color: #15c47e; color: #fff; }
-.div19 { line-height: 22px; }
