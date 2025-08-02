@@ -1,0 +1,13 @@
+.wrapper { display: flex; flex-direction: column; height: 100vh; background-color: #fff; }
+.header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 54px; border-bottom: 1px solid #f0f1f3; flex-shrink: 0; }
+.headerTitle { font-size: 18px; font-weight: 600; }
+.iconButton, .nextButton { background: none; border: none; cursor: pointer; font-size: 16px; font-weight: 600; }
+.nextButton { color: #15c47e; }
+.content { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.productItem { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px; cursor: pointer; border: 1px solid #f0f1f3; }
+.productItem:hover { background-color: #f7f9fa; }
+.productImage { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+.productName { flex-grow: 1; font-size: 16px; color: #3b4149; }
+.checkbox, .checkboxChecked { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #e2e6e9; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.checkboxChecked { background-color: #15c47e; border-color: #15c47e; }
+.infoText { text-align: center; color: #6a7685; padding-top: 40px; }
