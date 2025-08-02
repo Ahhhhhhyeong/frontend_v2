@@ -1,151 +1,117 @@
 // src/pages/ProductDetailPage.jsx
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
-import styles from './ProductDetailPage.module.css';
-import { ChevronRightIcon, HeartIcon, StarIcon, ChevronLeftIcon } from '../components/Icons';
+import { Link, useParams } from 'react-router-dom';
+import styles from './ProductDetailPage.module.css'; // 새로 적용될 CSS 모듈
+import { ChevronLeftIcon, StarIcon } from '../components/Icons'; // 필요한 아이콘 import
+
+// 상품 카드 컴포넌트
+const ProductCard = ({ product }) => (
+    <div className={styles.card}>
+        <img className={styles.img} src={product.mainImage} alt={product.productName} />
+        <div className={styles.info}>
+            <div className={styles.kg}>{product.productName}</div>
+            <div className={styles.price}>
+                {/* 할인율은 현재 데이터에 없으므로 임의로 표시합니다. */}
+                <div className={styles.div10}>12%</div> 
+                <div className={styles.div7}>{product.price || '999,999원'}</div>
+            </div>
+            <div className={styles.review}>
+                <StarIcon />
+                <div className={styles.div8}>5.0</div>
+                <div className={styles.div8}>(999+)</div>
+            </div>
+        </div>
+    </div>
+);
 
 export default function ProductDetailPage() {
     const { id } = useParams();
-    const location = useLocation();
-    const navigate = useNavigate();
     const [product, setProduct] = useState(null);
-    const isPreview = location.pathname.includes('/preview');
 
     useEffect(() => {
-        if (isPreview) {
-            setProduct(location.state);
-        } else {
-            const storedProduct = sessionStorage.getItem(`product-${id}`);
-            if (storedProduct) {
-                setProduct(JSON.parse(storedProduct));
-            } else {
-                console.log('상품 데이터를 찾을 수 없습니다.');
-            }
+        // sessionStorage에서 상품 데이터를 가져옵니다.
+        // 이 예제에서는 등록된 여러 상품 중 하나를 표시합니다.
+        // 실제 앱에서는 판매자 ID로 상품 목록을 가져오는 로직이 필요합니다.
+        const productKeys = Object.keys(sessionStorage).filter(key => key.startsWith('product-'));
+        const lastProductKey = productKeys[productKeys.length - 1]; // 가장 최근 상품을 가져옵니다.
+        
+        if (lastProductKey) {
+            setProduct(JSON.parse(sessionStorage.getItem(lastProductKey)));
         }
-    }, [id, isPreview, location.state]);
+    }, [id]);
 
     if (!product) {
         return <div>상품 정보를 불러오는 중...</div>;
     }
 
-    const handleRegister = () => {
-        const newProductId = Date.now();
-        sessionStorage.setItem(`product-${newProductId}`, JSON.stringify(product));
-        navigate(`/product-registration-confirmation?id=${newProductId}`);
-    };
-
     return (
         <div className={styles.div}>
-            {/* 상품 이미지 섹션 */}
-            <div className={styles.img}>
-                {product.mainImage && (
-                    <img src={product.mainImage} alt={product.productName} className="w-full h-full object-cover" />
-                )}
-            </div>
+            {/* 배경 이미지 */}
+            <img className={styles.imgIcon} alt="농장 배경" src={product.mainImage} />
 
             {/* 헤더 */}
-            <div className={styles.header}>
-                <Link to={isPreview ? '/register-product/detail' : '/'}>
+            <div className={styles.parent}>
+                <Link to="/seller-mypage">
                     <ChevronLeftIcon className={styles.chevronLeftIcon} />
                 </Link>
-                <div className={styles.div26}>{isPreview ? '상품 등록 미리보기' : '상세 페이지'}</div>
+                <div className={styles.div1}>{product.marketName || "새벽들딸기농원"}</div>
             </div>
 
-            {/* 상품 정보 및 탭 섹션 */}
-            <div className={styles.infoAndTab}>
-                <div className={styles.info}>
-                    <div className={styles.brand}>
-                        <Link to={`/brand/${product.brandName}`} className={styles.brand1}>
-                            <div className={styles.brandChild} />
-                            <div className={styles.div1}>농부 이름 (예시)</div>
-                        </Link>
-                        <ChevronRightIcon className={styles.chevronRightIcon} />
+            {/* 프로필 카드 영역 */}
+            <div className={styles.child} />
+            <div className={styles.profile}>
+                <img className={styles.profileChild} alt="프로필" src={product.mainImage} />
+                <div className={styles.group}>
+                    <div className={styles.div3}>{product.marketName || "새벽들딸기농원"}</div>
+                    <div className={styles.location}>
+                        {/* map-pin 아이콘은 현재 없으므로 생략합니다. */}
+                        <div className={styles.div4}>충남 논산 연무읍</div>
                     </div>
-                    <div className={styles.productInfo}>
-                        <div className={styles.kg}>{product.productName}</div>
-                        <div className={styles.starParent}>
-                            <StarIcon className={styles.starIcon} />
-                            <div className={styles.div2}>5.0</div>
-                            <div className={styles.div2}>(999+)</div>
-                        </div>
-                        <div className={styles.price}>
-                            <b className={styles.b}>99%</b>
-                            <b className={styles.b1}>{product.price || '가격 미정'}</b>
-                        </div>
-                    </div>
-                    <div className={styles.listParent}>
-                        <div className={styles.list}>
-                            <div className={styles.div5}>농부명</div>
-                            <div className={styles.cj}>김준식 농부</div>
-                        </div>
-                        <div className={styles.list}>
-                            <div className={styles.div5}>지역</div>
-                            <div className={styles.cj}>충남 논산 연무읍</div>
-                        </div>
-                        <div className={styles.list}>
-                            <div className={styles.div5}>재배방식</div>
-                            <div className={styles.cj}>무농약, 천연 미생물 사용</div>
-                        </div>
-                    </div>
-                    <div className={styles.listParent}>
-                        <div className={styles.list}>
-                            <div className={styles.div1}>배송</div>
-                            <div className={styles.cj}>
-                                <p className={styles.p}>7/24 도착 예정</p>
-                                <p className={styles.p}>무료배송 · 결제 3일 이내 출고 · CJ대한통운</p>
-                            </div>
-                        </div>
-                        <div className={styles.list5}>
-                            <div className={styles.div1}>적립</div>
-                            <div className={styles.cj}>최대 2,500원 적립</div>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.tabBar}>
-                    <div className={styles.tab}>
-                        <div className={styles.div16}>상세</div>
-                    </div>
-                    <div className={styles.tab1}>
-                        <div className={styles.div16}>후기</div>
-                        <div className={styles.div18}>999+</div>
-                    </div>
+                    <div className={styles.div5}>{product.description || "딸기에 진심인 새벽들딸기농원입니다."}</div>
                 </div>
             </div>
 
-            {/* 상품 상세 내용 */}
-            <div className={styles.div21}>
-                <div className={styles.contents}>
-                    <b className={styles.b2}>상품 설명</b>
-                    <div className={styles.div22}>{product.description}</div>
+            {/* 리뷰/팔로워 정보 */}
+            <div className={styles.infoList}>
+                <div className={styles.orderListTitle}>
+                    <div className={styles.div14}>0</div>
+                    <div className={styles.div15}>리뷰 평점</div>
                 </div>
-                {product.detailImages && product.detailImages.map((imgSrc, index) => (
-                    <div key={index} className={styles.contents}>
-                        <b className={styles.b2}>상세 이미지 {index + 1}</b>
-                        <img src={imgSrc} alt={`상세 이미지 ${index + 1}`} className="w-full h-auto" />
-                    </div>
-                ))}
+                <div className={styles.infoListChild} />
+                <div className={styles.orderListTitle}>
+                    <div className={styles.div14}>0</div>
+                    <div className={styles.div15}>리뷰수</div>
+                </div>
+                <div className={styles.infoListChild} />
+                <div className={styles.orderListTitle}>
+                    <div className={styles.div14}>0</div>
+                    <div className={styles.div15}>팔로워</div>
+                </div>
             </div>
 
-            {/* 하단 버튼 바 (미리보기일 경우 다르게 표시) */}
-            {isPreview ? (
-                <div className={styles.bottomButton}>
-                    <button onClick={handleRegister} className="w-full px-6 py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600">
-                        이대로 등록하기
-                    </button>
+            {/* 프로필 편집 버튼 */}
+            <div className={styles.button}>
+                <div className={styles.div2}>프로필 편집</div>
+            </div>
+
+            {/* 탭 메뉴 */}
+            <div className={styles.tabGroup}>
+                <div className={styles.tab}>
+                    <div className={styles.div20}>판매 상품</div>
                 </div>
-            ) : (
-                <div className={styles.bottomButton}>
-                    <HeartIcon className={styles.heartIcon} />
-                    <div className={styles.buttonGroup}>
-                        <button className={styles.button}>
-                            <div className={styles.div19}>장바구니</div>
-                        </button>
-                        <button className={styles.button1}>
-                            <div className={styles.div19}>바로구매</div>
-                        </button>
-                    </div>
+                <div className={styles.tab1}>
+                    <div className={styles.div20}>게시글</div>
                 </div>
-            )}
+            </div>
+
+            {/* 상품 목록 */}
+            <div className={styles.list}>
+                {/* 현재는 한 개의 상품 데이터만 가져오므로, 
+                  같은 상품을 여러 번 표시하여 목록처럼 보이게 합니다. 
+                */}
+                <ProductCard product={product} />
+                <ProductCard product={product} />
+            </div>
         </div>
     );
 };
