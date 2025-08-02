@@ -1,7 +1,7 @@
-// src/context/CommunityContext.jsx
+// src/context/CommunityContext.jsx (변경 없음)
 
 import React, { createContext, useContext, useState } from 'react';
-// ✨ [수정] 'data.js'에서 'farmerStories'를 가져오도록 import 구문을 수정합니다.
+// data.js에서 export한 farmerStories를 가져옵니다.
 import { farmerStories } from '../data';
 
 const CommunityContext = createContext();
@@ -9,7 +9,7 @@ const CommunityContext = createContext();
 export const useCommunity = () => useContext(CommunityContext);
 
 export const CommunityProvider = ({ children }) => {
-  // ✨ [수정] 상태 초기화 시 farmerStories를 사용합니다.
+  // farmerStories 데이터로 posts 상태를 초기화합니다.
   const [posts, setPosts] = useState(farmerStories);
 
   const addPost = (post) => {
