@@ -1,12 +1,10 @@
 // src/App.jsx
-// 앱의 전체 레이아웃과 페이지 경로를 관리하는 최상위 컴포넌트입니다.
-
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CommunityProvider } from './context/CommunityContext';
 
-// 컴포넌트들을 import 합니다.
-import Layout from './components/Layout.jsx';
+// --- ✨ 수정된 부분: Layout 컴포넌트를 import 합니다. ---
+import Layout from './components/Layout.jsx'; 
 import MainPage from './pages/MainPage.jsx';
 import CommunityPage from './pages/CommunityPage.jsx';
 import ProductRegistrationPage from './pages/ProductRegistrationPage.jsx';
@@ -16,10 +14,11 @@ import LoginPage from './pages/LoginPage.jsx';
 import MyPage from './pages/MyPage.jsx';
 import SellerMyPage from './pages/SellerMyPage.jsx';
 import ProductDetailRegistrationPage from './pages/ProductDetailRegistrationPage.jsx';
+// 새로 만든 판매자 마켓 페이지를 import 합니다.
+import SellerMarketPage from './pages/SellerMarketPage.jsx';
 
 export default function App() {
   return (
-    // CommunityProvider로 앱 전체의 상태를 관리합니다.
     <CommunityProvider>
       <BrowserRouter>
         <Routes>
@@ -31,7 +30,6 @@ export default function App() {
             <Route path="/seller-mypage" element={<SellerMyPage />} />
             <Route path="/product-detail/:id" element={<ProductDetailPage />} />
             <Route path="/product-detail/preview" element={<ProductDetailPage />} />
-            {/* 판매자 마이페이지 하위 메뉴 라우트 추가 */}
             <Route path="/seller-mypage/products" element={<div>나의 상품 관리 페이지</div>} />
             <Route path="/seller-mypage/product-inquiries" element={<div>상품 문의 관리 페이지</div>} />
             <Route path="/seller-mypage/reviews" element={<div>리뷰 관리 페이지</div>} />
@@ -44,6 +42,9 @@ export default function App() {
           <Route path="/register-product" element={<ProductRegistrationPage />} />
           <Route path="/register-product/detail" element={<ProductDetailRegistrationPage />} />
           <Route path="/product-registration-confirmation" element={<ProductRegistrationConfirmation />} />
+          
+          {/* 새로 추가된 판매자 마켓 페이지 경로 */}
+          <Route path="/seller-market" element={<SellerMarketPage />} />
         </Routes>
       </BrowserRouter>
     </CommunityProvider>

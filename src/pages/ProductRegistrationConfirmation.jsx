@@ -25,7 +25,7 @@ export default function ProductRegistrationConfirmation() {
                 관리자 확인 후 판매가 시작됩니다.
             </p>
             {productId && (
-                <Link to={`/product-detail/${productId}`} className="mt-4 px-8 py-3 bg-blue-500 rounded-lg text-white font-bold transition hover:bg-blue-600">
+                <Link to={`/seller-market`} className="mt-4 px-8 py-3 bg-blue-500 rounded-lg text-white font-bold transition hover:bg-blue-600">
                     등록한 상품 확인하기
                 </Link>
             )}

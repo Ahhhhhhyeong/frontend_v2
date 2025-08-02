@@ -1,17 +1,16 @@
+// src/pages/SellerMyPage.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRightIcon, UserIcon } from '../components/Icons'; // UserIcon 추가
+import { ChevronRightIcon, UserIcon } from '../components/Icons';
 
-// 활동 분석 차트의 막대를 그리기 위한 작은 컴포넌트
+// ... (StatBar 컴포넌트는 이전과 동일)
 const StatBar = ({ day, value, maxValue }) => {
-    // 가장 큰 값을 기준으로 막대의 높이를 계산합니다.
     const heightPercentage = maxValue > 0 ? (value / maxValue) * 100 : 0;
-
     return (
         <div className="flex flex-col items-center justify-end h-full gap-2">
             <div 
                 className={`w-full rounded-t ${value > 0 ? 'bg-green-500' : 'bg-gray-200'}`}
-                // 높이가 0일 경우에도 최소 높이를 보장하여 보일 수 있게 합니다.
                 style={{ height: `${heightPercentage}%`, minHeight: '4px' }}
             ></div>
             <span className="text-xs text-gray-500">{day}</span>
@@ -19,8 +18,8 @@ const StatBar = ({ day, value, maxValue }) => {
     );
 };
 
+
 export default function SellerMyPage() {
-    // 이미지에 표시된 활동 분석 데이터
     const activityData = {
         '월': 132, '화': 0, '수': 0, '목': 0, '금': 0, '토': 0, '일': 0
     };
@@ -50,21 +49,20 @@ export default function SellerMyPage() {
                         <span className="text-xl font-bold text-gray-800">0</span>
                         <span className="text-sm text-gray-500 mt-1">리뷰 평점</span>
                     </div>
-                    <div className="w-px bg-gray-200 h-8 self-center"></div> {/* 구분선 */}
+                    <div className="w-px bg-gray-200 h-8 self-center"></div>
                     <div className="flex flex-col items-center">
                         <span className="text-xl font-bold text-gray-800">0</span>
                         <span className="text-sm text-gray-500 mt-1">리뷰수</span>
                     </div>
-                    <div className="w-px bg-gray-200 h-8 self-center"></div> {/* 구분선 */}
+                    <div className="w-px bg-gray-200 h-8 self-center"></div>
                     <div className="flex flex-col items-center">
                         <span className="text-xl font-bold text-gray-800">0</span>
                         <span className="text-sm text-gray-500 mt-1">팔로워</span>
                     </div>
                 </div>
 
-      {/* --- ✨ 수정된 부분: 개인 마켓으로 가기 버튼 --- */}
-                {/* 클릭 시 상품 상세 페이지로 이동하도록 to prop을 수정했습니다. */}
-                <Link to="/product-detail/12345" className="mt-6 flex p-3 bg-gray-100 rounded-lg justify-between items-center">
+                {/* --- ✨ 수정된 부분: 개인 마켓으로 가기 버튼 링크 --- */}
+                <Link to="/seller-market" className="mt-6 flex p-3 bg-gray-100 rounded-lg justify-between items-center">
                     <div className="flex items-center space-x-3">
                         <div className="bg-green-100 p-1.5 rounded-full">
                             <UserIcon className="w-5 h-5 text-green-600" />
@@ -79,8 +77,8 @@ export default function SellerMyPage() {
             </div>
 
             <div className="h-3 bg-gray-100"></div>
-
-            {/* 활동 분석 섹션 */}
+            
+            {/* ... (이하 활동 분석 및 메뉴 섹션은 이전과 동일) ... */}
             <div className="p-5 bg-white">
                  <Link to="/seller-mypage/stats" className="flex justify-between items-center">
                     <h3 className="text-base font-bold text-gray-900">활동분석</h3>
@@ -96,10 +94,7 @@ export default function SellerMyPage() {
                     </div>
                 </div>
             </div>
-
             <div className="h-3 bg-gray-100"></div>
-
-            {/* 커머스 메뉴 섹션 */}
             <div className="bg-white">
                 <h3 className="text-base font-bold text-gray-900 px-5 pt-5">커머스</h3>
                 <div className="mt-2">
@@ -127,10 +122,7 @@ export default function SellerMyPage() {
                     </Link>
                 </div>
             </div>
-
             <div className="h-3 bg-gray-100"></div>
-
-            {/* 커뮤니티 메뉴 섹션 */}
             <div className="bg-white pb-4">
                 <h3 className="text-base font-bold text-gray-900 px-5 pt-5">커뮤니티</h3>
                 <div className="mt-2">
