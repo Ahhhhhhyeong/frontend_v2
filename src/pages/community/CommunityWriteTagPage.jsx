@@ -1,7 +1,5 @@
-/**
- * CommunityWriteTagPage.jsx
- * 글쓰기 3단계: 상품 태그 페이지
- */
+// src/pages/community/CommunityWriteTagPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCommunityWriteStore from '../../store/communityWriteStore';
@@ -16,6 +14,7 @@ export default function CommunityWriteTagPage() {
     const [myProducts, setMyProducts] = useState([]);
 
     useEffect(() => {
+        // 로컬 스토리지에서 등록된 상품 목록을 불러옵니다.
         const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
         setMyProducts(storedProducts);
     }, []);
@@ -25,7 +24,6 @@ export default function CommunityWriteTagPage() {
             <header className={styles.header}>
                 <button onClick={() => navigate(-1)} className={styles.iconButton}><ChevronLeftIcon /></button>
                 <h1 className={styles.headerTitle}>상품 태그</h1>
-                {/* 4단계인 '등록 완료' 페이지로 이동하도록 수정 */}
                 <button onClick={() => navigate('/community/write-confirm')} className={styles.nextButton}>완료</button>
             </header>
             <main className={styles.content}>

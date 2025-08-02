@@ -1,5 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// src/pages/community/CommunityWriteImagePage.jsx
+
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useCommunityWriteStore from '../../store/communityWriteStore';
 import styles from './CommunityWriteImagePage.module.css';
 
@@ -10,31 +12,32 @@ const CloseIcon = () => ( <svg width="16" height="16" viewBox="0 0 24 24"><path 
 
 export default function CommunityWriteImagePage() {
     const navigate = useNavigate();
-    // Zustand 스토어에서 이미지 관련 상태와 함수를 가져옵니다.
+    const location = useLocation();
     const { images, addImages, removeImage } = useCommunityWriteStore();
+
+    useEffect(() => {
+        // 이전 페이지에서 전달된 파일이 있다면 스토어에 추가
+        if (location.state?.files) {
+            addImages(location.state.files);
+        }
+    }, [location.state, addImages]);
 
     return (
         <div className={styles.wrapper}>
-            {/* --- 헤더 --- */}
             <header className={styles.header}>
                 <button onClick={() => navigate(-1)} className={styles.iconButton}><ChevronLeftIcon /></button>
                 <h1 className={styles.headerTitle}>이미지 추가</h1>
                 <button onClick={() => navigate('/community/write-tag')} className={styles.nextButton}>다음</button>
             </header>
-
-            {/* --- 이미지 미리보기 및 업로드 --- */}
             <main className={styles.content}>
                 <p className={styles.infoText}>사진은 최대 5장까지 추가할 수 있어요.</p>
                 <div className={styles.imageGrid}>
-                    {/* 업로드된 이미지들을 표시합니다. */}
                     {images.map((image, index) => (
                         <div key={index} className={styles.imagePreviewContainer}>
-                            <img src={image} alt={`업로드 이미지 ${index + 1}`} className={styles.imagePreview} />
+                            <img src={image} alt={`uploaded ${index + 1}`} className={styles.imagePreview} />
                             <button onClick={() => removeImage(index)} className={styles.deleteButton}><CloseIcon /></button>
                         </div>
                     ))}
-
-                    {/* 이미지가 5장 미만일 때만 업로드 버튼을 보여줍니다. */}
                     {images.length < 5 && (
                         <label htmlFor="image-upload" className={styles.uploadBox}>
                             <CameraIcon />
