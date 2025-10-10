@@ -23,6 +23,7 @@ import ProductPreviewPage from './pages/ProductPreviewPage';
 import SellerMarketPage from './pages/SellerMarketPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductRegistrationConfirmation from './pages/ProductRegistrationConfirmation';
+import NotFoundPage from './pages/NotFoundPage';
 
 // --- 커뮤니티 글쓰기 페이지 ---
 import CommunityWritePage from './pages/community/CommunityWritePage';
@@ -65,6 +66,8 @@ function App() {
 
           {/* 그룹 3: 독립적인 전체 화면 페이지 */}
           <Route path='/login' element={<LoginPage />} />
+          {/* 🆕 404 페이지 - 모든 정의되지 않은 경로를 처리 */}
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </CommunityProvider>
