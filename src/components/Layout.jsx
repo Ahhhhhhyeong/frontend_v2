@@ -15,10 +15,6 @@ export default function Layout() {
   const scrollDirection = useScrollDirection();
   const { headerHeight, headerRef } = useHeaderHeight(location);
 
-  // 디버깅용 로그 추가
-  console.log('scrollDirection:', scrollDirection);
-  console.log('window.scrollY:', window.scrollY);
-
   // 커뮤니티 페이지 체크
   const isCommunityPage = location.pathname.startsWith('/community');
   // Header와 MainTabs를 보여줄 페이지들 정의
