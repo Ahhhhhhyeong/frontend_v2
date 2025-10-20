@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '@/assets/icons/Logo.svg?react';
+import Logo from '@/assets/icons/logo.svg?react';
 import ShoppingCartIcon from '@/assets/icons/shopping-cart.svg?react';
 import UserIcon from '@/assets/icons/user.svg?react';
 import { SearchIcon } from '../Icons';
