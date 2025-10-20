@@ -1,6 +1,7 @@
 // components/ProductDetailRegistrationForm/OptionSection.jsx
 import React, { useState } from 'react';
 import styles from '@/pages/ProductDetailRegistrationPage.module.css';
+import { ProductNameInput } from './ProductNameInput';
 
 const TrashIcon = () => (
   <svg width='20' height='20' viewBox='0 0 24 24'>
@@ -20,7 +21,15 @@ const PlusIcon = () => (
   </svg>
 );
 
-export const OptionSection = ({ control, Controller, optionFields, handleAddOption, handleRemoveOption, errors }) => {
+export const OptionSection = ({
+  control,
+  Controller,
+  optionFields,
+  handleAddOption,
+  handleRemoveOption,
+  errors,
+  watch,
+}) => {
   return (
     <div className={styles.optionSection}>
       <div className={styles.sectionTitle}>옵션 및 가격</div>
@@ -36,70 +45,58 @@ export const OptionSection = ({ control, Controller, optionFields, handleAddOpti
             )}
           </div>
 
-          <Controller
+          <ProductNameInput
             name={`options.${index}.name`}
+            label='옵션명' // 라벨이 필요없다면 빈 문자열
+            placeholder='옵션명 (예: 무게)'
+            maxLength={20} // 적절한 길이 설정
+            required={true}
             control={control}
-            rules={{ required: '옵션명을 입력해주세요.' }}
-            render={({ field: { onChange, value, ...fieldProps } }) => (
-              <input
-                {...fieldProps}
-                type='text'
-                value={value || ''}
-                onChange={onChange}
-                onInput={onChange} // onInput 이벤트 추가
-                className={`${styles.optionInput} ${errors.options?.[index]?.name ? styles.error : ''}`}
-                placeholder='옵션명 (예: 무게)'
-              />
-            )}
+            Controller={Controller}
+            validationRules={{
+              [`options.${index}.name`]: { required: '예) 무게 / 개수 / 포장단위 / 크기' },
+            }}
+            errors={errors}
+            watch={watch}
+            className={styles.optionInput} // 기존 스타일 유지
           />
-
-          <Controller
+          <ProductNameInput
             name={`options.${index}.value`}
+            label='옵션값' // 라벨이 필요없다면 빈 문자열
+            placeholder='옵션값 (예: 1kg)'
+            maxLength={20} // 적절한 길이 설정
+            required={true}
             control={control}
-            rules={{ required: '옵션값을 입력해주세요.' }}
-            render={({ field }) => (
-              <input
-                {...field}
-                className={`${styles.optionInput} ${errors.options?.[index]?.value ? styles.error : ''}`}
-                type='text'
-                placeholder='옵션값 (예: 1kg)'
-              />
-            )}
+            Controller={Controller}
+            validationRules={{
+              [`options.${index}.name`]: { required: '예) 1kg / 3개입 / 1박스 / 대' },
+            }}
+            errors={errors}
+            watch={watch}
+            className={styles.optionInput} // 기존 스타일 유지
           />
-
-          <Controller
+          <ProductNameInput
             name={`options.${index}.price`}
+            label='옵션값' // 라벨이 필요없다면 빈 문자열
+            placeholder='15000'
+            type='number'
+            maxLength={20} // 적절한 길이 설정
+            required={true}
             control={control}
-            rules={{
-              required: '옵션 가격을 입력해주세요.',
-              min: {
-                value: 0,
-                message: '가격은 0 이상이어야 합니다.',
+            Controller={Controller}
+            validationRules={{
+              [`options.${index}.name`]: {
+                required: '옵션 가격 숫자만 입력해주세요.',
+                min: {
+                  value: 0,
+                  message: '가격은 0 이상이어야 합니다.',
+                },
               },
             }}
-            render={({ field }) => (
-              <input
-                {...field}
-                className={`${styles.optionInput} ${errors.options?.[index]?.price ? styles.error : ''}`}
-                type='number'
-                placeholder='옵션 가격 (원)'
-              />
-            )}
+            errors={errors}
+            watch={watch}
+            className={styles.optionInput} // 기존 스타일 유지
           />
-
-          {errors.options?.[index] && (
-            <div className={styles.errorContainer}>
-              {errors.options[index].name && (
-                <span className={styles.errorMessage}>{errors.options[index].name.message}</span>
-              )}
-              {errors.options[index].value && (
-                <span className={styles.errorMessage}>{errors.options[index].value.message}</span>
-              )}
-              {errors.options[index].price && (
-                <span className={styles.errorMessage}>{errors.options[index].price.message}</span>
-              )}
-            </div>
-          )}
         </div>
       ))}
 

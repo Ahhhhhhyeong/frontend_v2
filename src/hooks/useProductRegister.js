@@ -20,6 +20,8 @@ export const useProductRegistrationForm = () => {
     mainImage,
     setData,
     setMainImage,
+    farmerName,
+    marketName,
 
     // 상세 정보
     details,
@@ -46,6 +48,8 @@ export const useProductRegistrationForm = () => {
       category: category || '',
       productName: productName || '',
       mainImage: mainImage || null,
+      marketName: marketName || '',
+      farmerName: farmerName || '',
 
       // 상세 정보 (2단계)
       details: details || [],
@@ -74,7 +78,7 @@ export const useProductRegistrationForm = () => {
 
   // const watchedValues = watch();
   const watchedCategory = useWatch({ control, name: 'category' });
-  const watchedProductName = useWatch({ control, name: 'productName' });
+  const watchedProductName = useWatch({ control, name: 'itemName' });
   const watchedOptions = useWatch({ control, name: 'options' });
   const watchedDiscount = useWatch({ control, name: 'discount' });
 
@@ -82,7 +86,7 @@ export const useProductRegistrationForm = () => {
   useEffect(() => {
     // 기본 정보 동기화
     setValue('category', category || '');
-    setValue('productName', productName || '');
+    setValue('itemName', productName || '');
     setValue('mainImage', mainImage || null);
 
     // 상세 정보 동기화
@@ -311,7 +315,7 @@ export const useProductRegistrationForm = () => {
       isDetailStep: () => currentStep === 'detail',
       // 특정 필드가 현재 단계에서 필요한지 확인
       isFieldRequired: (fieldName) => {
-        const basicFields = ['category', 'mainImage', 'productName'];
+        const basicFields = ['category', 'mainImage', 'itemName'];
         const detailFields = ['options', 'discount'];
 
         if (currentStep === 'basic') {

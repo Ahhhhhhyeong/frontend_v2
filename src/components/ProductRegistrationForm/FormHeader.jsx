@@ -2,12 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '@/pages/ProductRegistrationPage.module.css';
-
-const ChevronLeftIcon = () => (
-  <svg width='24' height='24' viewBox='0 0 24 24'>
-    <path d='M15 18L9 12L15 6' stroke='#333' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
-  </svg>
-);
+import { ChevronLeftIcon } from '../Icons';
 
 export const FormHeader = ({ isValid, handleSubmit, onSubmit, pageNo = 1 }) => (
   <div className={styles.header}>
