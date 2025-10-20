@@ -1,12 +1,15 @@
 // services/itemApi.js
 import { get } from 'react-hook-form';
 import api from './api';
+import { createFormData } from '../utils/formData';
 
 export const itemApi = {
   // POST 요청
   createItem: async (prdId, itemData) => {
     try {
-      const resp = await api.post(`/items/${prdId}`, itemData);
+      const formData = createFormData(itemData);
+      // const resp = await api.post(`/items/${prdId}`, itemData);
+      const resp = await api.post(`/items/${prdId}`, formData);
       return resp;
     } catch (error) {
       throw error;
