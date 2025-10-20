@@ -27,7 +27,7 @@ export default function MainPage() {
 
   return (
     <div className='relative'>
-      <main className='px-4 py-6 space-y-10'>
+      <main className='px-4 py-6 space-y-10 bg-white'>
         <CategoryChips categories={categories} activeChip={activeChip} setActiveChip={setActiveChip} />
         <MainBanner mainBannerImg={mainBannerImg} userAvatarImg={userAvatarImg} />
 
