@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // 컴포넌트 임포트
-import Section from '@/components/Section.jsx';
-import ProductCard from '@/components/ProductCard.jsx';
-import StoryCard from '@/components/StoryCard.jsx';
-import { EditIcon } from '@/components/Icons.jsx';
 import CategoryChips from '@/components/chips/CategoryChips.jsx';
 import MainBanner from '@/components/banner/MainBanner.jsx';
 // 이미지 임포트
@@ -16,7 +12,7 @@ import { interestProducts, seasonalProducts, farmerStories } from '@/data.js';
 import ProductRecommendationSection from './commerce/ProductRecommendationSection';
 import SeasonalFoodSection from './commerce/SeasonalFoodSection.jsx';
 import StorySection from './commerce/StorySection.jsx';
-import FloatButton from '../../components/button/FloatButton.jsx';
+// import FloatButton from '../../components/button/FloatButton.jsx';
 
 // --- 메인 페이지 컴포넌트 ---
 export default function MainPage() {
@@ -27,7 +23,7 @@ export default function MainPage() {
 
   return (
     <div className='relative'>
-      <main className='px-4 py-6 space-y-10'>
+      <main className='px-4 py-6 space-y-10 bg-white'>
         <CategoryChips categories={categories} activeChip={activeChip} setActiveChip={setActiveChip} />
         <MainBanner mainBannerImg={mainBannerImg} userAvatarImg={userAvatarImg} />
 
