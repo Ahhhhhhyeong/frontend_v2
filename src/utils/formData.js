@@ -1,7 +1,7 @@
 // utils/formData.js
 export const createFormData = (data) => {
   const formData = new FormData();
-
+  console.log('파싱 원본 데이터', data);
   Object.keys(data).forEach((key) => {
     const value = data[key];
 

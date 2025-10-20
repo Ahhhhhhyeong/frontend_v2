@@ -25,6 +25,7 @@ const useProductStore = create(
 
       // --- 상세 정보 (4가지 주제) ---
       details: [
+        // 재배환경 소개
         {
           id: 1,
           title: '',
@@ -35,6 +36,7 @@ const useProductStore = create(
             content: '충남 논산의 기름진 땅에서, 따스한 햇살을 받으며 자랍니다.',
           },
         },
+        // 재배 방식/철학
         {
           id: 2,
           title: '',
@@ -45,6 +47,7 @@ const useProductStore = create(
             content: '농약 대신 천연 미생물을 사용하고, 매일 새벽 밭을 살피며 최상의 상태를 유지합니다.',
           },
         },
+        // 선별 및 관리 방식
         {
           id: 3,
           title: '',
@@ -55,6 +58,7 @@ const useProductStore = create(
             content: '당일 수확한 딸기 중 가장 신선하고 상태 좋은 것들만 직접 손으로 선별합니다.',
           },
         },
+        // 포장 및 배송 안내
         {
           id: 4,
           title: '',

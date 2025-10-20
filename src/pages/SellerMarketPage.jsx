@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './SellerMarketPage.module.css';
+import DefaultImage from '@/assets/images/UserProfile.jpg';
 
 // 아이콘 컴포넌트
 const ChevronLeftIcon = () => (
@@ -19,7 +20,7 @@ export default function SellerMarketPage() {
   const [products, setProducts] = useState([]);
   const [profile, setProfile] = useState({
     marketName: '내 마켓', // 기본값
-    profileImage: 'https://placehold.co/108x108?text=Profile', // 기본값
+    profileImage: DefaultImage, // 기본값
   });
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function SellerMarketPage() {
       const latestProduct = storedProducts[0];
       setProfile({
         marketName: latestProduct.marketName,
-        profileImage: latestProduct.mainImage,
+        profileImage: DefaultImage,
       });
     }
   }, []);
