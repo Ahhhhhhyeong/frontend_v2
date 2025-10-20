@@ -2,10 +2,9 @@
 import React from 'react';
 import styles from './ProductDetailRegistrationPage.module.css';
 import { useProductRegistrationForm } from '@/hooks/useProductRegister';
-import { FormHeader } from '@/components/ProductRegistrationForm/FormHeader';
+import { FormHeader } from '@/components/Header/FormHeader';
 import { DetailSection } from '@/components/ProductRegistrationForm/DetailSection';
-import { OptionSection } from '@/components/ProductRegistrationForm/OptionSection';
-import { DiscountSection } from '@/components/ProductRegistrationForm/DiscountSection';
+// import { OptionSection } from '@/components/ProductRegistrationForm/OptionSection';
 
 export default function ProductDetailRegistrationPage() {
   const {
@@ -36,7 +35,7 @@ export default function ProductDetailRegistrationPage() {
 
   return (
     <div className={styles.wrapper}>
-      <FormHeader pageNo={2} />
+      <FormHeader isValid={isValid} handleSubmit={handleSubmit} onSubmit={onSubmit} />
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.content}>
         <div className={styles.sectionTitle}>상세 정보 등록</div>
@@ -53,19 +52,6 @@ export default function ProductDetailRegistrationPage() {
             handleDetailFieldChange={handleDetailFieldChange}
           />
         ))}
-
-        {/* 옵션 및 가격 섹션 */}
-        <OptionSection
-          control={control}
-          Controller={Controller}
-          optionFields={optionFields}
-          handleAddOption={handleAddOption}
-          handleRemoveOption={handleRemoveOption}
-          errors={errors}
-        />
-
-        {/* 할인 설정 섹션 */}
-        <DiscountSection control={control} Controller={Controller} errors={errors} validationRules={validationRules} />
       </form>
 
       <div className={styles.bottomBar}>

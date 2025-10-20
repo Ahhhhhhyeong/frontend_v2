@@ -7,7 +7,7 @@ import HomeIcon from '@/assets/icons/home.svg?react';
 export default function MyPageHeader() {
   const location = useLocation();
   const isMyPage = location.pathname.includes('seller-mypage');
-  console.log('마이페이지: ', isMyPage);
+
   return (
     <header className={`${styles.header} ${isMyPage ? '' : styles.mypageColor}`}>
       <h1 className={styles.title}>마이페이지</h1>

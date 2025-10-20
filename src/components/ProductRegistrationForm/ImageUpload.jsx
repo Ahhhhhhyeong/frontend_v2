@@ -1,7 +1,8 @@
 // components/ProductRegistrationForm/ImageUpload.jsx
 import React from 'react';
 import styles from '@/pages/ProductRegistrationPage.module.css';
-
+import FormGuideCard from '../FormGuideCard';
+import productImage from '@/assets/images/product-watermelon.jpg';
 const CameraIcon = () => (
   <svg width='32' height='32' viewBox='0 0 24 24'>
     <path
@@ -17,8 +18,18 @@ const CameraIcon = () => (
 export const ImageUpload = ({ control, Controller, validationRules, errors, handleImageChange }) => (
   <div className={styles.inputGroup}>
     <label className={styles.label}>
-      대표 이미지 <span className={styles.required}>*</span>
+      대표 이미지를 올려주세요 <span className={styles.required}>*</span>
     </label>
+    <FormGuideCard
+      title='상품 사진 촬영 가이드'
+      guidelines={[
+        '저화질, 초점이 나간 이미지는 피해주세요',
+        '상품을 잘 나타내는 직관적인 이미지를 선택해주세요',
+        '배경은 너무 어둡지 않게 촬영해주세요',
+      ]}
+      exampleImages={[{ src: productImage, alt: '좋은 예시 1' }]}
+      className='mx-auto'
+    />
     <Controller
       name='mainImage'
       control={control}
