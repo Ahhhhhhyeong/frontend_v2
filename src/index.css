@@ -60,3 +60,19 @@ body,
   background-color: #f3f4f6; /* 전체 페이지 배경색 */
   font-family: 'Pretendard', sans-serif; /* 기본 폰트를 Pretendard로 설정 */
 }
+
+.hide-scrollbar {
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE and Edge */
+  -ms-overflow-style: none;
+
+  /* 터치 스크롤 개선 */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
