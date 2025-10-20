@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LogoIcon from '@/assets/icons/Logo.svg?react';
+import Logo from '@/assets/icons/Logo.svg?react';
 import ShoppingCartIcon from '@/assets/icons/shopping-cart.svg?react';
 import UserIcon from '@/assets/icons/user.svg?react';
 import { SearchIcon } from '../Icons';
@@ -12,7 +12,7 @@ export default function Header() {
     <header className='bg-white px-4 py-3 flex justify-between items-center '>
       {/* 로고 클릭 시 홈으로 이동하는 기능 추가 */}
       <Link to='/'>
-        <LogoIcon className='h-6 w-[86px]' />
+        <Logo className='h-6 w-[86px]' />
       </Link>
 
       <div className='flex items-center space-x-4'>
