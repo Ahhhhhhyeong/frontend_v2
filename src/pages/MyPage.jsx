@@ -18,9 +18,15 @@ export default function MyPage() {
   );
 }
 
+// const menuItems = [
+//   { path: '/mypage/orders', label: '주문배송내역 조회' },
+//   { path: '/mypage/likes', label: '좋아요' },
+//   { path: '/mypage/bookmarks', label: '북마크' },
+//   { path: '/mypage/reviews', label: '나의 리뷰' },
+// ];
 const menuItems = [
-  { path: '/mypage/orders', label: '주문배송내역 조회' },
-  { path: '/mypage/likes', label: '좋아요' },
-  { path: '/mypage/bookmarks', label: '북마크' },
-  { path: '/mypage/reviews', label: '나의 리뷰' },
+  { path: '', label: '주문배송내역 조회' },
+  { path: '', label: '좋아요' },
+  { path: '', label: '북마크' },
+  { path: '', label: '나의 리뷰' },
 ];

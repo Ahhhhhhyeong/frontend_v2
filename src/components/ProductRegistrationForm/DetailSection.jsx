@@ -1,35 +1,41 @@
 // components/ProductDetailRegistrationForm/DetailSection.jsx
 import React from 'react';
 import styles from '@/pages/ProductDetailRegistrationPage.module.css';
-
-const CameraIcon = () => (
-  <svg width='24' height='24' viewBox='0 0 24 24'>
-    <path
-      d='M4 8.25V6.75C4 5.64543 4.89543 4.75 6 4.75H8.5L10.5 2.75H13.5L15.5 4.75H18C19.1046 4.75 20 5.64543 20 6.75V8.25M4 8.25V17.25C4 18.3546 4.89543 19.25 6 19.25H18C19.1046 19.25 20 18.3546 20 17.25V8.25M4 8.25H20M12 16.25C13.6569 16.25 15 14.9069 15 13.25C15 11.5931 13.6569 10.25 12 10.25C10.3431 10.25 9 11.5931 9 13.25C9 14.9069 10.3431 16.25 12 16.25Z'
-      stroke='#6a7685'
-      strokeWidth='1.5'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    />
-  </svg>
-);
-
+import FormGuideCard from '@/components/FormGuideCard';
+import CameraIcon from '@/assets/icons/Camera.svg?react';
 export const DetailSection = ({
   index,
   title: sectionTitle,
   detail,
+  formGuideCard,
   handleDetailImageChange,
   handleUseExample,
   handleDetailFieldChange,
 }) => {
+  // console.log('formGuideCard 여부 확인:', formGuideCard);
   return (
     <div className={styles.detailSection}>
       <label className={styles.sectionLabel}>
         {sectionTitle} <span className={styles.required}>*</span>
       </label>
 
+      {/* Tip 보여주는 부분 */}
+      {formGuideCard && (
+        <FormGuideCard
+          title={formGuideCard.title}
+          guidelines={formGuideCard.guidelines}
+          exampleImages={formGuideCard.exampleImages}
+        />
+      )}
       <label htmlFor={`detail-image-${index}`} className={styles.imgUpload}>
-        {detail?.image ? <img src={detail.image} alt='상세 이미지' className={styles.imagePreview} /> : <CameraIcon />}
+        {detail?.image ? (
+          <img src={detail.image} alt='상세 이미지' className={styles.imagePreview} />
+        ) : (
+          <div className='flex flex-col justify-center items-center space-y-2'>
+            <CameraIcon color={'#3B4149'} />
+            <span className='self-stretch text-lg text-gray-800 font-semibold '>사진 올리기</span>
+          </div>
+        )}
       </label>
 
       <input
@@ -42,7 +48,9 @@ export const DetailSection = ({
 
       <div className={styles.inputGroup}>
         <div className={styles.inputHeader}>
-          <label className={styles.label}>제목</label>
+          <label className={styles.label}>
+            제목 <span className={styles.required}>*</span>
+          </label>
           <button type='button' onClick={() => handleUseExample(index, 'title')} className={styles.exampleButton}>
             예시 사용
           </button>
@@ -59,7 +67,9 @@ export const DetailSection = ({
 
       <div className={styles.inputGroup}>
         <div className={styles.inputHeader}>
-          <label className={styles.label}>내용</label>
+          <label className={styles.label}>
+            내용 <span className={styles.required}>*</span>
+          </label>
           <button type='button' onClick={() => handleUseExample(index, 'content')} className={styles.exampleButton}>
             예시 사용
           </button>
