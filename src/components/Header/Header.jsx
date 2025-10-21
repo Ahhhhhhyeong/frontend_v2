@@ -8,7 +8,7 @@ import { SearchIcon } from '../Icons';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const user = JSON.parse(localStorage.getItem('user')).state;
+  const user = JSON.parse(localStorage.getItem('user')) || {};
 
   return (
     <header className='bg-white px-4 py-3 flex justify-between items-center '>
