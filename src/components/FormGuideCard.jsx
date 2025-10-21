@@ -13,8 +13,7 @@ export default function FormGuideCard({
   exampleImages = [],
   className = '',
 }) {
-  // 이미지가 있는경우 true(이미지 보이게 열어둠)
-  const [isExpanded, setIsExpanded] = useState(exampleImages ? true : false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -54,7 +53,7 @@ export default function FormGuideCard({
           <div className='px-2 py-1 bg-green-500 rounded flex justify-center items-center gap-1 flex-shrink-0'>
             <span className='text-white text-xs font-semibold  leading-tight'>추천</span>
           </div>
-          <h3 className='text-green-500 text-sm font-semibold  leading-snug flex-1'>{title}</h3>
+          <h3 className='text-green-500 text-mb font-semibold  leading-snug flex-1'>{title}</h3>
         </div>
         {/* 가이드라인 */}
         <ul className='text-gray-1000 text-sm font-normal leading-snug w-full space-y-2 list-disc list-inside'>

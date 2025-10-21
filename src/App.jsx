@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // --- 레이아웃 컴포넌트 ---
 import Layout from './components/Layout';
 import FormLayout from './components/FormLayout';
+import ScrollToTop from './components/ScrollToTop'; // 추가
 
 // --- 페이지 컴포넌트 (모든 페이지 import) ---
 import MainPage from './pages/home/MainPage';
@@ -38,6 +39,7 @@ function App() {
   return (
     <CommunityProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* 그룹 1: 메인 앱 화면 (하단 탭 바가 있는 레이아웃) */}
           <Route element={<Layout />}>
