@@ -23,16 +23,26 @@ export default function SellerMyPage() {
     { label: '팔로워', value: '0' },
   ];
 
+  // const commerceMenuItems = [
+  //   { path: '/register-product', label: '상품 등록하기' },
+  //   { path: '/seller-mypage/products', label: '나의 상품 관리', count: 0 },
+  //   { path: '/seller-mypage/product-inquiries', label: '상품 문의 관리', count: 0 },
+  //   { path: '/seller-mypage/reviews', label: '리뷰' },
+  // ];
   const commerceMenuItems = [
     { path: '/register-product', label: '상품 등록하기' },
-    { path: '/seller-mypage/products', label: '나의 상품 관리', count: 0 },
-    { path: '/seller-mypage/product-inquiries', label: '상품 문의 관리', count: 0 },
-    { path: '/seller-mypage/reviews', label: '리뷰' },
+    { path: '', label: '나의 상품 관리', count: 0 },
+    { path: '', label: '상품 문의 관리', count: 0 },
+    { path: '', label: '리뷰' },
   ];
 
+  // const communityMenuItems = [
+  //   { path: '/seller-mypage/posts', label: '작성 글', count: 0 },
+  //   { path: '/seller-mypage/comments', label: '댓글', count: 0 },
+  // ];
   const communityMenuItems = [
-    { path: '/seller-mypage/posts', label: '작성 글', count: 0 },
-    { path: '/seller-mypage/comments', label: '댓글', count: 0 },
+    { path: '', label: '작성 글', count: 0 },
+    { path: '', label: '댓글', count: 0 },
   ];
 
   return (

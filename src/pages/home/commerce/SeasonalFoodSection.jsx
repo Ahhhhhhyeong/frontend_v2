@@ -3,11 +3,11 @@ import Section from '@/components/Section.jsx';
 import ProductCard from '@/components/ProductCard.jsx';
 import useDragScroll from '@/hooks/useDragScroll.js';
 
-export default function SeasonalFoodSection({ seasonalProducts }) {
+export default function SeasonalFoodSection({ seasonalProducts, title = '10월 인기 제철음식' }) {
   const { scrollRef, dragHandlers, isDragging } = useDragScroll();
 
   return (
-    <Section title='7월 인기 제철음식' showMore={true}>
+    <Section title={title} showMore={true}>
       <div className='-mx-4'>
         <div
           // className='flex space-x-4 overflow-x-auto px-4 pb-4'

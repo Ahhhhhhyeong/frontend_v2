@@ -32,47 +32,42 @@ import CommunityWriteImagePage from './pages/community/CommunityWriteImagePage';
 import CommunityWriteTagPage from './pages/community/CommunityWriteTagPage';
 import CommunityWriteConfirmPage from './pages/community/CommunityWriteConfirmPage';
 
-// --- Context Provider ---
-import { CommunityProvider } from './context/CommunityContext';
-
 function App() {
   return (
-    <CommunityProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          {/* 그룹 1: 메인 앱 화면 (하단 탭 바가 있는 레이아웃) */}
-          <Route element={<Layout />}>
-            <Route path='/' element={<MainPage />} />
-            <Route path='/community' element={<CommunityPage />} />
-            <Route path='/mypage' element={<MyPage />} />
-            <Route path='/seller-mypage' element={<SellerMyPage />} />
-            <Route path='/seller-market' element={<SellerMarketPage />} />
-            <Route path='/product-detail/:id' element={<ProductDetailPage />} />
-          </Route>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        {/* 그룹 1: 메인 앱 화면 (하단 탭 바가 있는 레이아웃) */}
+        <Route element={<Layout />}>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/community' element={<CommunityPage />} />
+          <Route path='/mypage' element={<MyPage />} />
+          <Route path='/seller-mypage' element={<SellerMyPage />} />
+          <Route path='/seller-market' element={<SellerMarketPage />} />
+          <Route path='/product-detail/:id' element={<ProductDetailPage />} />
+        </Route>
 
-          {/* 그룹 2: 폼 전용 레이아웃 */}
-          <Route element={<FormLayout />}>
-            {/* 상품 등록 관련 */}
-            <Route path='/register-product' element={<ProductRegistrationPage />} />
-            <Route path='/register-product/detail' element={<ProductDetailRegistrationPage />} />
-            <Route path='/product-detail/preview' element={<ProductPreviewPage />} />
-            <Route path='/product-registration-confirmation' element={<ProductRegistrationConfirmation />} />
+        {/* 그룹 2: 폼 전용 레이아웃 */}
+        <Route element={<FormLayout />}>
+          {/* 상품 등록 관련 */}
+          <Route path='/register-product' element={<ProductRegistrationPage />} />
+          <Route path='/register-product/detail' element={<ProductDetailRegistrationPage />} />
+          <Route path='/product-detail/preview' element={<ProductPreviewPage />} />
+          <Route path='/product-registration-confirmation' element={<ProductRegistrationConfirmation />} />
 
-            {/* ✨ [수정] 커뮤니티 글쓰기 6단계에 해당하는 전체 경로 재정의 */}
-            <Route path='/community/write' element={<CommunityWritePage />} />
-            <Route path='/community/write-image' element={<CommunityWriteImagePage />} />
-            <Route path='/community/write-tag' element={<CommunityWriteTagPage />} />
-            <Route path='/community/write-confirm' element={<CommunityWriteConfirmPage />} />
-          </Route>
+          {/* ✨ [수정] 커뮤니티 글쓰기 6단계에 해당하는 전체 경로 재정의 */}
+          <Route path='/community/write' element={<CommunityWritePage />} />
+          <Route path='/community/write-image' element={<CommunityWriteImagePage />} />
+          <Route path='/community/write-tag' element={<CommunityWriteTagPage />} />
+          <Route path='/community/write-confirm' element={<CommunityWriteConfirmPage />} />
+        </Route>
 
-          {/* 그룹 3: 독립적인 전체 화면 페이지 */}
-          <Route path='/login' element={<LoginPage />} />
-          {/* 🆕 404 페이지 - 모든 정의되지 않은 경로를 처리 */}
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
-      </BrowserRouter>
-    </CommunityProvider>
+        {/* 그룹 3: 독립적인 전체 화면 페이지 */}
+        <Route path='/login' element={<LoginPage />} />
+        {/* 🆕 404 페이지 - 모든 정의되지 않은 경로를 처리 */}
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
