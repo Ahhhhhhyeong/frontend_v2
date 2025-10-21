@@ -12,7 +12,7 @@ export const DetailSection = ({
   handleUseExample,
   handleDetailFieldChange,
 }) => {
-  console.log('formGuideCard 여부 확인:', formGuideCard);
+  // console.log('formGuideCard 여부 확인:', formGuideCard);
   return (
     <div className={styles.detailSection}>
       <label className={styles.sectionLabel}>

@@ -23,6 +23,7 @@ export default function ProductDetailPage() {
   const handleBuyNow = () => {
     // 바로구매 로직
     console.log('바로구매');
+    // TODO: 구매 옵션 모달 열기
   };
 
   const handleToggleWishlist = () => {
@@ -39,7 +40,7 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className={styles.div}>
+    <div className={`${styles.div} h-full pb-20`}>
       <img className={styles.imgIcon} src={product.mainImage} alt={product.productName} />
 
       <ProductHeader onBack={handleBack} />

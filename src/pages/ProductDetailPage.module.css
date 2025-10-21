@@ -170,9 +170,10 @@
 
 .bottomButton {
   position: fixed;
+  width: 480px;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%); /* 자신의 너비의 절반 만큼 되돌리기 */
   background-color: #fff;
   border-top: 1px solid #f0f1f3;
   padding: 16px;

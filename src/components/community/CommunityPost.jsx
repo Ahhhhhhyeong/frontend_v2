@@ -13,16 +13,16 @@ export default function CommunityPost({ post, activeTooltipId, setActiveTooltipI
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount((prev) => (isLiked ? prev - 1 : prev + 1));
-    // TODO: API 호출
+    // API 호출
   };
 
   const handleComment = () => {
-    // TODO: 댓글 창 열기
+    // 댓글 창 열기
     console.log('댓글 클릭');
   };
 
   const handleShare = () => {
-    // TODO: 북마크 기능
+    // 북마크 기능
     console.log('북마크 클릭');
   };
 
