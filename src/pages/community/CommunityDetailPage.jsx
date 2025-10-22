@@ -14,10 +14,10 @@ export default function CommunityDetailPage() {
   const { id } = useParams();
   // TODO: id를 사용하여 커뮤니티 글 데이터 불러오고 표현
   const { data: post } = fetchById(id);
-  console.log(post.taggedProducts);
+  console.log(post?.taggedProducts);
 
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(post.likeCount || 0);
+  const [likeCount, setLikeCount] = useState(post?.likeCount || 0);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -64,7 +64,7 @@ export default function CommunityDetailPage() {
       {/* 인터렉션 바 추가 */}
       <PostInteractionBar
         likeCount={likeCount}
-        commentCount={post.commentCount || 0}
+        commentCount={post?.commentCount || 0}
         onLike={handleLike}
         onComment={handleComment}
         onShare={handleShare}
