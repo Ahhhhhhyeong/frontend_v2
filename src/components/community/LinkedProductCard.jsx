@@ -3,6 +3,12 @@
 import React from 'react';
 
 const LinkedProductCard = ({ product, onClick }) => {
+  const discountPrice = (discountRate, price) => {
+    if (!discountRate) return price.toLocaleString();
+    const discount = price * (1 - discountRate / 100);
+    return discount.toLocaleString();
+  };
+
   return (
     <button
       onClick={onClick}
@@ -19,7 +25,7 @@ const LinkedProductCard = ({ product, onClick }) => {
             </span>
           )}
           <span className="text-neutral-900 text-sm font-semibold font-['Pretendard'] leading-tight">
-            {product.price.toLocaleString()}원
+            {discountPrice(product.discountRate, product.price)}원
           </span>
         </div>
       </div>

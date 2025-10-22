@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Section from '@/components/Section.jsx';
-import ProductCard from '@/components/ProductCard.jsx';
+import ProductCard from '@/components/productcard/ProductCard.jsx';
 import useDragScroll from '@/hooks/useDragScroll.js';
 
 export default function ProductRecommendationSection({ userName, tabs, interestProducts }) {

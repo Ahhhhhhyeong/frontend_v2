@@ -1,4 +1,5 @@
 // 유저의 정보를 불러오는 훅
+import { useEffect, useState } from 'react';
 import { seller, user } from '../data';
 import { useUserStore } from '../store/userStore';
 
@@ -27,4 +28,43 @@ export const useUserInfo = () => {
   };
 
   return { guestAuth, sellerAuth, initializeUser };
+};
+
+export const useUserCheck = () => {
+  const [isSeller, setIsSeller] = useState(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      return user?.state.isSeller ?? false;
+    } catch {
+      return false;
+    }
+  });
+  const [user, setUser] = useState(() => {
+    try {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      return userData?.state || null;
+    } catch (error) {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'user') {
+        try {
+          const updatedUser = JSON.parse(e.newValue);
+          setIsSeller(updatedUser?.isSeller ?? false);
+          setUser(updatedUser || null);
+        } catch {
+          setIsSeller(false);
+          setUser(null);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  return { isSeller, user };
 };

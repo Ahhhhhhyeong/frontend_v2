@@ -38,7 +38,9 @@
 .imgIcon {
   width: 100%;
   height: 375px;
-  object-fit: cover;
+  padding-top: 54px; /* 헤더 높이만큼 패딩 추가 */
+  /* object-fit: cover; */
+  object-fit: fill;
 }
 
 .infoAndTab {
@@ -117,18 +119,34 @@
   text-decoration: line-through;
 }
 .listParent {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 8px;
   margin-top: 16px;
+  border: 1px solid #f0f1f3;
+  border-radius: 8px;
+  padding: 16px;
 }
 .list {
-  display: flex;
+  display: grid;
+  grid-template-columns: 80px 120px;
   align-items: center;
-  justify-content: space-between;
+  column-gap: 12px;
   font-size: 15px;
   color: #3b4149;
   line-height: 22px;
+}
+/* 선택사항: 왼쪽 라벨 스타일 */
+.list span:first-child {
+  font-weight: 500;
+  color: #5b6068;
+  text-align: left;
+}
+
+/* 선택사항: 오른쪽 값 스타일 */
+.list span:last-child {
+  font-weight: 600;
+  color: #1b1d1f;
+  text-align: left; /* 완전히 표처럼 왼쪽 정렬 */
 }
 .div5 {
   color: #6a7685;
@@ -170,7 +188,9 @@
 
 .bottomButton {
   position: fixed;
-  width: 480px;
+  /* width: 480px; */
+  width: 100%;
+  max-width: 480px;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%); /* 자신의 너비의 절반 만큼 되돌리기 */
@@ -208,4 +228,18 @@
 }
 .div19 {
   line-height: 22px;
+}
+
+@media (max-width: 400px) {
+  .button,
+  .button1 {
+    width: 8rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .button,
+  .button1 {
+    width: 7rem;
+  }
 }

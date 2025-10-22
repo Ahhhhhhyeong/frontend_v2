@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DefaultImage from '@/assets/images/UserProfile.jpg';
 import clsx from 'clsx';
-import { useUserInfo } from '../../hooks/useUserInfo';
+import DefaultImage from '@/assets/images/UserProfile.jpg';
+import { useUserInfo, useUserCheck } from '../../hooks/useUserInfo';
+import styles from './ProfileSection.module.css';
 
 export default function ProfileSection({ type = 'customer' }) {
   const isSeller = type === 'seller';
   const { guestAuth, sellerAuth } = useUserInfo();
+  const { user } = useUserCheck();
 
   return (
     <div className={clsx('w-full flex items-center justify-between', isSeller ? 'pt-4 px-5 pb-6' : 'h-[48px] p-4')}>
@@ -17,14 +19,14 @@ export default function ProfileSection({ type = 'customer' }) {
         <div className={clsx(isSeller && 'flex-grow')}>
           {isSeller ? (
             <>
-              <div className='flex items-baseline gap-1'>
-                <span className='text-lg font-semibold text-gray-800'>새벽들딸기농원</span>
+              <div className={`flex items-baseline gap-1 ${styles.flex380col}`}>
+                <span className='text-lg font-semibold text-gray-800 '>{user.marketName}</span>
                 <span className='text-sm font-semibold text-gray-600'>농부님</span>
               </div>
             </>
           ) : (
             <>
-              <div className='text-lg font-semibold text-gray-900'>김준식</div>
+              <div className='text-lg font-semibold text-gray-900'>{user.userName}</div>
             </>
           )}
           <div className='text-sm text-gray-900'>jun0909</div>

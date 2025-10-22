@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRightIcon } from '../Icons';
+import styles from './OrderSection.module.css';
 
 const orderStatus = [
   { label: '입금\n대기', count: 0 },
@@ -15,7 +16,7 @@ export default function OrdersSection() {
     <div className='p-5'>
       <h3 className='px-3 text-base font-semibold text-gray-900'>진행중인 주문</h3>
 
-      <div className='pt-3 flex items-center justify-between text-center text-gray-600 text-sm'>
+      <div className={`${styles.baseCard}`}>
         {orderStatus.map((status, idx) => (
           <React.Fragment key={idx}>
             <div className='flex flex-col items-center min-w-0 flex-1'>
