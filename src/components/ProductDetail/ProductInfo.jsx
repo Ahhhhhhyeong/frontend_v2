@@ -5,7 +5,7 @@ import { formatPrice, calculateDiscountedPrice } from '@/utils/formatPrice';
 import styles from '@/pages/ProductDetailPage.module.css';
 
 export const ProductInfo = ({ product }) => {
-  const firstOptionPrice = product.options?.[0]?.price;
+  const firstOptionPrice = product?.price || product.options?.[0]?.price;
   const discountedPrice = calculateDiscountedPrice(firstOptionPrice, product.discount);
 
   return (
@@ -27,7 +27,7 @@ export const ProductInfo = ({ product }) => {
         </div>
         <div className={styles.price}>
           {product.discount && <b className={styles.b}>{product.discount}%</b>}
-          <b className={styles.b1}>{formatPrice(discountedPrice)}원</b>
+          <b className={styles.b1}>{formatPrice(discountedPrice) || 0}원</b>
         </div>
         {product.discount && <div className={styles.div4}>{formatPrice(firstOptionPrice)}원</div>}
       </div>
@@ -38,18 +38,18 @@ export const ProductInfo = ({ product }) => {
 };
 
 const ProductDetailList = ({ product }) => (
-  <div className={styles.listParent}>
-    <div className={styles.list}>
-      <div className={styles.div5}>농부</div>
-      <div className={styles.cj}>{product.farmerName}</div>
+  <div className='p-4 rounded-2xl border border-gray-200 flex flex-col gap-4'>
+    <div className='grid grid-cols-[100px_1fr] gap-4'>
+      <div className='text-gray-500 text-sm font-medium leading-tight'>농부</div>
+      <div className='text-gray-900 text-sm font-normal leading-tight'>{product.farmerName} 농부</div>
     </div>
-    <div className={styles.list}>
-      <div className={styles.div5}>경력</div>
-      <div className={styles.cj}>{product.career}</div>
+    <div className='grid grid-cols-[100px_1fr] gap-4'>
+      <div className='text-gray-500 text-sm font-medium leading-tight'>경력</div>
+      <div className='text-gray-900 text-sm font-normal leading-tight'>{product.career}</div>
     </div>
-    <div className={styles.list}>
-      <div className={styles.div5}>재배방식</div>
-      <div className={styles.cj}>{product.cultivationMethod}</div>
+    <div className='grid grid-cols-[100px_1fr] gap-4'>
+      <div className='text-gray-500 text-sm font-medium leading-tight'>재배방식</div>
+      <div className='text-gray-900 text-sm font-normal leading-tight'>{product.cultivationMethod}</div>
     </div>
   </div>
 );

@@ -31,6 +31,7 @@ import CommunityWritePage from './pages/community/CommunityWritePage';
 import CommunityWriteImagePage from './pages/community/CommunityWriteImagePage';
 import CommunityWriteTagPage from './pages/community/CommunityWriteTagPage';
 import CommunityWriteConfirmPage from './pages/community/CommunityWriteConfirmPage';
+import CommunityDetailPage from './pages/community/CommunityDetailPage';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path='/community/write-image' element={<CommunityWriteImagePage />} />
           <Route path='/community/write-tag' element={<CommunityWriteTagPage />} />
           <Route path='/community/write-confirm' element={<CommunityWriteConfirmPage />} />
+          <Route path='/community/:id' element={<CommunityDetailPage />} />
         </Route>
 
         {/* 그룹 3: 독립적인 전체 화면 페이지 */}

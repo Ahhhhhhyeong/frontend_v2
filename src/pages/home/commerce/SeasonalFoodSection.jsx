@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from '@/components/Section.jsx';
-import ProductCard from '@/components/ProductCard.jsx';
+import ProductCard from '@/components/productcard/ProductCard.jsx';
 import useDragScroll from '@/hooks/useDragScroll.js';
 
 export default function SeasonalFoodSection({ seasonalProducts, title = '10월 인기 제철음식' }) {

@@ -8,10 +8,10 @@ export const itemApi = {
   createItem: async (prdId, itemData) => {
     try {
       const formData = createFormData(itemData);
-      console.log(formData);
+      console.log('itemApi - createItem - formData:', formData);
       // const resp = await api.post(`/items/${prdId}`, itemData);
-      const resp = await api.post(`/items/${prdId}`, formData);
-      return resp;
+      // const resp = await api.post(`/items/${prdId}`, formData);
+      return { status: 408, data: {} };
     } catch (error) {
       throw error;
     }

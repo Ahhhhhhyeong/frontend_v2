@@ -1,5 +1,5 @@
 // pages/ProductDetailPage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProduct } from '@/hooks/useProduct';
 import { ProductHeader } from '@/components/ProductDetail/ProductHeader';
@@ -7,11 +7,13 @@ import { ProductInfo } from '@/components/ProductDetail/ProductInfo';
 import { ProductDetailContent } from '@/components/ProductDetail/ProductDetailContent';
 import { ProductActions } from '@/components/ProductDetail/ProductActions';
 import styles from './ProductDetailPage.module.css';
+import PaymentBottomSheet from '../components/payments/PaymentBottomSheet';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { product, loading, error } = useProduct(id);
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const handleBack = () => navigate(-1);
 
@@ -24,6 +26,7 @@ export default function ProductDetailPage() {
     // 바로구매 로직
     console.log('바로구매');
     // TODO: 구매 옵션 모달 열기
+    setIsSelectOpen(true);
   };
 
   const handleToggleWishlist = () => {
@@ -41,16 +44,16 @@ export default function ProductDetailPage() {
 
   return (
     <div className={`${styles.div} h-full pb-20`}>
-      <img className={styles.imgIcon} src={product.mainImage} alt={product.productName} />
-
       <ProductHeader onBack={handleBack} />
+
+      <img className={styles.imgIcon} src={product.mainImage} alt={product.productName} />
 
       <div className={styles.infoAndTab}>
         <ProductInfo product={product} />
       </div>
 
       <ProductDetailContent details={product.details} />
-
+      {isSelectOpen && <PaymentBottomSheet setIsSelectOpen={setIsSelectOpen} />}
       <ProductActions onAddToCart={handleAddToCart} onBuyNow={handleBuyNow} onToggleWishlist={handleToggleWishlist} />
     </div>
   );
