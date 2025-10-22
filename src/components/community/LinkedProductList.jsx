@@ -10,7 +10,7 @@ const LinkedProductList = ({ products = [], onProductClick }) => {
     return null;
   }
 
-  console.log('LinkedProductList: Rendering products');
+  // console.log('LinkedProductList: Rendering products');
   return (
     <div className='self-stretch w-full px-5 py-2 inline-flex justify-start items-start gap-1 overflow-x-auto'>
       {products &&

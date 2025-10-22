@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import PostHeader from './PostHeader';
 import PostContent from './PostContent';
 import PostImageWithTags from './PostImageWithTag';
-import PostInteractionBar from '@/components/social/PostInteractionBar.jsx';
+import PostInteractionBar from '@/components/social/PostInteractionBar';
 import LinkedProductList from './LinkedProductList';
+import { useNavigate } from 'react-router-dom';
 
 export default function CommunityPost({ post, activeTooltipId, setActiveTooltipId }) {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeCount || 0);
-
+  const navigation = useNavigate();
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount((prev) => (isLiked ? prev - 1 : prev + 1));
@@ -30,13 +31,21 @@ export default function CommunityPost({ post, activeTooltipId, setActiveTooltipI
     <article className='w-full py-12'>
       <PostHeader user={post.user} />
 
-      <PostContent content={post.content} />
+      <div onClick={() => navigation(`/community/${post.id}`)} className='hover:cursor-pointer'>
+        <PostContent content={post.content} />
+      </div>
 
       {/* 배찌 추가 */}
       {post.images && post.images.length > 0 && <PostImageWithTags post={post} />}
 
       {/* 상품 데이터 */}
-      {Array.isArray(post?.product) && post.product.length > 0 && <LinkedProductList products={post.product} />}
+      {Array.isArray(post?.product) && post.product.length > 0 && (
+        <div
+          // onClick={() => navigation(`/community/${post.id}`)}
+          className='hover:cursor-pointer'>
+          <LinkedProductList products={post.product} />
+        </div>
+      )}
 
       {/* 인터랙션 바 추가 */}
       <PostInteractionBar
