@@ -9,7 +9,7 @@ export default function CommonHeader({ leftButton = 'prev', rightButton = '', ti
     if (leftButton === 'prev' && leftButton === 'close') {
       navigate(-1);
     }
-    return;
+    // return;
   };
   return (
     <header className='flex items-center justify-between px-4 h-[54px] flex-shrink-0'>
