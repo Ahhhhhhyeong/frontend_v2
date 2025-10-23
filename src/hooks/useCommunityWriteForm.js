@@ -49,6 +49,8 @@ export default function useCommunityWriteForm() {
     // TODO: 실제 API 연동 시 이부분에서 API 호출
     // TODO: toast 추가
     setData({ title: data.title, content: data.content });
+    // zustand 스토어 초기화
+    reset();
     alert('게시글 작성이 완료되었습니다!');
     // 다음 페이지로 이동
     navigate('/community');
