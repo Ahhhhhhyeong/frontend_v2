@@ -81,6 +81,11 @@ const useCommunityWriteStore = create(
     }),
     {
       name: 'community-write-storage',
+      // 이미지 파일은 persist에서 제외 (직렬화 불가)
+      partialize: (state) => ({
+        title: state.title,
+        content: state.content,
+      }),
     }
   )
 );

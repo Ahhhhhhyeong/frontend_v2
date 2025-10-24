@@ -62,7 +62,7 @@ export default function ImageCarousel({
                 type='button'
                 onClick={handleAddTag}
                 className='
-                      absolute bottom-4 left-1/2 -translate-x-1/2
+                      absolute bottom-8 left-1/2 -translate-x-1/2
                       bg-green-500 text-white
                       px-4 py-2 rounded-xl shadow-md
                       hover:bg-green-600 active:scale-95 transition-all
@@ -79,7 +79,9 @@ export default function ImageCarousel({
           )}
         </>
       ) : (
-        <div className='flex flex-col gap-1 justify-center items-center'>
+        <div
+          onClick={() => mode === 'edit' && document.getElementById('image-upload-input')?.click()}
+          className='flex flex-col gap-1 justify-center items-center'>
           <CameraIcon />
           <span className='text-lg font-semibold text-gray-800 leading-relaxed'>사진올리기</span>
           <span className='text-base font-md leading-snug text-gray-500'>10장까지 올릴 수 있어요</span>
