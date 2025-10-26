@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 // --- hook ---
-import { fetchById } from '@/hooks/useCommunityPosts';
+import { fetchById, useCommunityPosts } from '@/hooks/useCommunityPosts';
 
 // --- 컴포넌트 ---
 import CommonHeader from '@/components/Header/CommonHeader';
@@ -14,6 +14,7 @@ export default function CommunityDetailPage() {
   const { id } = useParams();
   // TODO: id를 사용하여 커뮤니티 글 데이터 불러오고 표현
   const { data: post } = fetchById(id);
+  // const { getPostsDetail } = useCommunityPosts(id);
   console.log(post?.taggedProducts);
 
   const [isLiked, setIsLiked] = useState(false);

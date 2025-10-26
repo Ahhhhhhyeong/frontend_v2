@@ -41,8 +41,8 @@ export default function SellerMarketPage() {
   return (
     <div className={styles.div}>
       {/* --- 상단 헤더 --- */}
-      <div className={styles.header}>
-        <button onClick={() => navigate('/')} className={styles.headerButton}>
+      <div className={`${styles.header}`}>
+        <button onClick={() => navigate(-1)} className={styles.headerButton}>
           <ChevronLeftIcon />
         </button>
         <div className={styles.div1}>{profile.marketName}</div>
@@ -50,7 +50,7 @@ export default function SellerMarketPage() {
       </div>
 
       {/* --- 프로필 정보 --- */}
-      <div className={styles.profileSection}>
+      <div className={`${styles.profileSection}`}>
         <img className={styles.profileImage} src={profile.profileImage} alt='프로필 이미지' />
         <div className={styles.marketName}>{profile.marketName}</div>
         <div className={styles.marketIntro}>딸기에 진심인 {profile.marketName}입니다.</div>
@@ -72,10 +72,11 @@ export default function SellerMarketPage() {
               <img
                 className={styles.imgIcon1}
                 src={product.mainImage || 'https://placehold.co/92x92'}
-                alt={product.productName}
+                alt={product.productName || product.itemName}
               />
               <div className={styles.info}>
-                <b className={styles.kg}>{product.productName}</b>
+                {/* <b className={styles.kg}>{product.productName}</b> */}
+                <b className={`${styles.kg}`}>{product.productName || product.itemName}</b>
                 <div className={styles.price}>
                   {product.discount && <div className={styles.div10}>{product.discount}%</div>}
                   <div className={styles.div7}>

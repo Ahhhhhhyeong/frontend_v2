@@ -12,6 +12,16 @@ export const communityApi = {
     }
   },
 
+  // GET 요청: 디테일
+  getPostsDetail: async (postId) => {
+    try {
+      const response = await api.get(`/posts/${postId}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // POST 요청
   createPost: async (id, postData) => {
     try {

@@ -19,7 +19,7 @@ export const ProductInfo = ({ product }) => {
       </div>
 
       <div className={styles.productInfo}>
-        <div className={styles.kg}>{product.productName}</div>
+        <div className={styles.kg}>{product?.productName || product?.itemName}</div>
         <div className={styles.starParent}>
           <StarIcon />
           <div className={styles.div2}>0.0</div>

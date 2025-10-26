@@ -7,6 +7,7 @@ const getApiConfig = () => {
   const baseConfig = {
     timeout: 10000,
     headers: {
+      'ngrok-skip-browser-warning': 'true',
       // 'Content-Type': 'application/json',
       'Content-Type': 'multipart/form-data',
     },

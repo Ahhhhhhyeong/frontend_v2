@@ -52,8 +52,8 @@ export default function CommunityWriteTagPage() {
           myProducts.map((product) => (
             <ProductCardRevers
               key={product.id}
-              name={product.name || product.productName}
-              price={product?.price}
+              itemName={product.name || product.productName}
+              itemPrice={product?.price}
               rating={product?.priceRating}
               reviews={product?.reviews || 0}
               image={product?.image || product?.mainImage}

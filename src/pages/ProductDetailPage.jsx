@@ -12,7 +12,7 @@ import PaymentBottomSheet from '../components/payments/PaymentBottomSheet';
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { product, loading, error } = useProduct(id);
+  const { data: product, isLoading: loading, error } = useProduct(id);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const handleBack = () => navigate(-1);

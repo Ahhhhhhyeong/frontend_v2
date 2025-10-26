@@ -20,8 +20,11 @@ const useProductStore = create(
       category: '',
       marketName: '새벽들딸기농원',
       farmerName: '김준식',
-      career: '',
+      career: '1년',
+      storageOption: '', // 보관 방법
+      farmingOption: '', // 재배 방식
       cultivationMethod: '',
+      itemPrice: 0,
 
       // --- 상세 정보 (4가지 주제) ---
       details: [
@@ -72,8 +75,8 @@ const useProductStore = create(
       ],
 
       // --- 가격 및 옵션 ---
-      options: [{ name: '', value: '', price: '' }],
-      discount: '',
+      options: [{ name: '', value: '', price: 0 }],
+      discount: 0,
 
       // --- 액션 함수들 ---
       setData: (data) =>
@@ -122,7 +125,10 @@ const useProductStore = create(
           mainImage: null,
           category: '',
           career: '',
+          storageOption: '', // 보관 방법
+          farmingOption: '', // 재배 방식
           cultivationMethod: '',
+          itemPrice: '',
           details: [
             {
               id: 1,

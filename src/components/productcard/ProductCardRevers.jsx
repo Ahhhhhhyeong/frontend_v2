@@ -2,8 +2,8 @@ import React from 'react';
 import { StarIcon } from '../Icons';
 
 export default function ProductCardRevers({
-  name = '[사전구매] 무농약 따스한 햇살담은 딸기 1kg',
-  price = 15000,
+  itemName = '[사전구매] 무농약 따스한 햇살담은 딸기 1kg',
+  itemPrice = 15000,
   discount = 10,
   rating = 0.0,
   reviews = 0,
@@ -21,15 +21,15 @@ export default function ProductCardRevers({
       {/* --- 상품 정보 영역 --- */}
       <div className='flex items-center gap-3 w-full sm:w-auto'>
         {/* 이미지 */}
-        <img src={image} alt={name} className='w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover flex-shrink-0' />
+        <img src={image} alt={itemName} className='w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover flex-shrink-0' />
 
         {/* 텍스트 정보 */}
         <div className='flex flex-col justify-between flex-1 min-w-0'>
-          <div className='text-gray-700 text-sm font-bold line-clamp-2'>{name}</div>
+          <div className='text-gray-700 text-sm font-bold line-clamp-2'>{itemName}</div>
 
           <div className='flex gap-1 text-gray-900 text-base font-semibold mt-1'>
             {discount > 0 && <span className='text-red-500 mr-1'>{discount}%</span>}
-            <span>{discountPrice(discount, price)}원</span>
+            <span>{discountPrice(discount, itemPrice)}원</span>
           </div>
 
           <div className='flex items-center gap-1 mt-1'>

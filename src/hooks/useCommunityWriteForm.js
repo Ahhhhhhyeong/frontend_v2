@@ -4,6 +4,9 @@ import { shallow } from 'zustand/shallow';
 import useCommunityWriteStore from '@/store/communityWriteStore';
 import { useEffect } from 'react';
 import { use } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { postApi } from '../services/postApi';
+import toast from 'react-hot-toast';
 
 /**
  * react-hook-form + zustand 연동을 위한 커스텀 훅
@@ -11,7 +14,8 @@ import { use } from 'react';
 export default function useCommunityWriteForm() {
   // zustand store 에서 이전에 입력했던 값(초기값)을 가져옵니다.
   // selector 에서 object 가 아니라 primitive 와 함수만 꺼내면 무한루프가 없습니다.
-  const { title, content, setTitle, setContent, reset } = useCommunityWriteStore();
+  const { title, content, images, setTitle, setContent, taggedProducts, reset } = useCommunityWriteStore();
+  const { savePostMutation } = useCreateCommunityPost(1);
   const initTitle = useCommunityWriteStore((state) => state.title);
   const initContent = useCommunityWriteStore((state) => state.content);
   const setData = useCommunityWriteStore((state) => state.setData);
@@ -44,16 +48,35 @@ export default function useCommunityWriteForm() {
   }, [watchedContent, setContent]);
 
   // form submit 시 호출될 함수
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // zustand 에 데이터 저장
-    // TODO: 실제 API 연동 시 이부분에서 API 호출
-    // TODO: toast 추가
-    setData({ title: data.title, content: data.content });
-    // zustand 스토어 초기화
-    reset();
-    alert('게시글 작성이 완료되었습니다!');
-    // 다음 페이지로 이동
-    navigate('/community');
+    // TODO: 실제 API 연동 시 이부분에서 API 호출 + toast 추가
+    const params = {
+      ...data,
+      itemIds: taggedProducts,
+      images: images,
+    };
+    console.log('파라미터: ', params);
+    const saveItem = savePostMutation.mutateAsync(params);
+
+    await toast.promise(saveItem, {
+      loading: '저장하는 중...',
+      success: (resp) => {
+        reset();
+        navigate('/community', { replace: true });
+        return resp?.message || '글이 성공적으로 저장되었습니다.';
+      },
+      error: (error) => {
+        console.error('저장 실패: ', error);
+        // 로컬스토리지 저장???
+        const existingProducts = JSON.parse(localStorage.getItem('community')) || [];
+        existingProducts.unshift(params);
+        localStorage.setItem('community', JSON.stringify(existingProducts));
+        reset();
+        navigate('/community', { replace: true });
+        return '저장에 실패했습니다.';
+      },
+    });
   };
 
   return {
@@ -65,3 +88,26 @@ export default function useCommunityWriteForm() {
     watch,
   };
 }
+
+const useCreateCommunityPost = (producerId) => {
+  const queryClient = useQueryClient();
+  const savePostMutation = useMutation({
+    mutationFn: (item) => postApi.createPost(producerId, item),
+    onSuccess: (resp) => {
+      console.log('커뮤니티 글 작성 완료: ', resp);
+      queryClient.setQueryData(['community'], (oldData) => {
+        if (oldData) {
+          return [...oldData, item];
+        }
+        return [item];
+      });
+    },
+    onError: (error) => {
+      console.error('커뮤니티 글 작성 에러: ', error);
+    },
+  });
+
+  return {
+    savePostMutation,
+  };
+};

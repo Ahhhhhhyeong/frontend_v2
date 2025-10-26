@@ -41,7 +41,8 @@ export default function CommunityPost({ post, activeTooltipId, setActiveTooltipI
       {/* 상품 데이터 */}
       {Array.isArray(post?.product) && post.product.length > 0 && (
         <div
-          // onClick={() => navigation(`/community/${post.id}`)}
+          // onClick={() => navigation(`/product-detail/${post.id}`)}
+          onClick={() => console.log('상세페이지 이동해야함')}
           className='hover:cursor-pointer'>
           <LinkedProductList products={post.product} />
         </div>

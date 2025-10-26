@@ -9,12 +9,20 @@ export const useSellProduct = (producerId) => {
   // 상인 유저의 판매 데이터 가져오기
   const sellItemData = useQuery({
     queryKey: ['get-items-producer', producerId],
-    queryFn: () => itemApi.getItemsProducer(producerId),
+    queryFn: () =>
+      itemApi.getItemsProducer(
+        producerId,
+        (params = {
+          page: 0,
+          size: 1,
+          sort: ['string'], // 얘가 뭔지???
+        })
+      ),
     select: (response) => response.data,
     enabled: !!producerId,
-    staleTime: 5 * 60 * 1000,
-    cacheTime: 10 * 60 * 1000,
-    retry: 2,
+    staleTime: 30 * 60 * 1000,
+    cacheTime: 30 * 60 * 1000,
+    retry: 1,
   });
 
   // 판매 물품 신규 등록createItem
@@ -44,5 +52,34 @@ export const useSellProduct = (producerId) => {
     // 상태관련
     isLoading: sellItemData.isLoading || saveItemMutation.isLoading,
     isError: sellItemData.isError || saveItemMutation.isError,
+  };
+};
+
+export const useCreateNewSell = (producerId) => {
+  const queryClient = useQueryClient();
+  // 판매 물품 신규 등록createItem
+  const saveItemMutation = useMutation({
+    mutationFn: (item) => itemApi.createItem(producerId, item),
+    onSuccess: (resp) => {
+      console.log(resp);
+      queryClient.setQueryData(['get-items-producer', producerId], (oldData) => {
+        if (oldData) {
+          return [...oldData, item];
+        }
+        return [item];
+      });
+    },
+    onError: (error) => {
+      console.error('물품 등록 에러: ', error);
+    },
+  });
+
+  return {
+    // 물품 신규 등록 관련
+    saveItemMutation,
+
+    // 상태관련
+    isLoading: saveItemMutation.isLoading,
+    isError: saveItemMutation.isError,
   };
 };

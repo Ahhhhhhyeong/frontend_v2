@@ -132,6 +132,34 @@ export const farmerStories = [
   },
 ];
 
+// 커뮤니티에서 상품 선택 시 호출할거
+export const farmerStoriesProd = [
+  {
+    id: 101,
+    name: '무농약 꿀사과',
+    price: 15000,
+    image: productImg1,
+    brand: '싱그러운 농장',
+    discountRate: 10,
+  },
+  {
+    id: 102,
+    name: '유기농 대추토마토',
+    price: 12000,
+    image: productImg2,
+    brand: '행복 농원',
+    discountRate: 5,
+  },
+  {
+    id: 103,
+    name: '논산 설향 딸기 1kg',
+    price: 24000,
+    image: productImg1,
+    brand: '딸기농장',
+    discountRate: 8,
+  },
+];
+
 // MainPage에서 사용할 배너 이미지 export
 export { mainBannerImg, userAvatarImg1 as userAvatarImg };
 

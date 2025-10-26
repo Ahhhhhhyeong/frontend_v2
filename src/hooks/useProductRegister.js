@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useProductStore from '../store/productStore';
-import { useSellProduct } from './useSellProduct';
+import { useCreateNewSell } from './useSellProduct';
+import { dataLogics, findCategoryNo } from '../utils/productWriteDataMapper';
 
 export const useProductRegistrationForm = () => {
   const navigate = useNavigate();
@@ -38,20 +39,25 @@ export const useProductRegistrationForm = () => {
   } = useProductStore();
 
   const categories = ['과일', '채소', '축산', '수산', '김치/젓갈', '쌀/잡곡'];
-  const { saveItemMutation } = useSellProduct(1);
+  const { saveItemMutation } = useCreateNewSell(1);
 
   // 통합 폼 설정
   const form = useForm({
     mode: 'onChange',
     defaultValues: {
       // 기본 정보 (1단계)
-      category: category || '',
-      productName: productName || '',
+      // category: category || '',
+      // categoryId: findCategoryNo(category, categories),
+      category: '과일',
+      itemName: productName || '',
+      itemPrice: productData.itemPrice || 0,
       mainImage: mainImage || null,
       marketName: marketName || '',
       farmerName: farmerName || '',
-
-      // 상세 정보 (2단계)
+      career: productData.career || '1년',
+      storageOption: '', // 보관 방법
+      farmingOption: '', // 재배 방식
+      // 상세 정보
       details: details || [],
       options: options.length > 0 ? options : [{ name: '', value: '', price: '' }],
       discount: discount || '',
@@ -92,36 +98,8 @@ export const useProductRegistrationForm = () => {
     // 상세 정보 동기화
     setValue('details', details || []);
     setValue('options', options.length > 0 ? options : [{ name: '', value: '', price: '' }]);
-    setValue('discount', discount || '');
+    setValue('discount', discount || 0);
   }, [category, productName, mainImage, details, options, discount, setValue]);
-
-  // // 폼 값이 변경될 때 스토어 업데이트
-  // useEffect(() => {
-  //   // 기본 정보 업데이트
-  //   if (watchedValues.category !== category) {
-  //     setData({ category: watchedValues.category });
-  //   }
-  //   if (watchedValues.productName !== productName) {
-  //     setData({ productName: watchedValues.productName });
-  //   }
-
-  //   // 상세 정보 업데이트 (detail 단계에서만)
-  //   if (currentStep === 'detail') {
-  //     if (watchedValues.options) {
-  //       watchedValues.options.forEach((option, index) => {
-  //         if (JSON.stringify(option) !== JSON.stringify(options[index])) {
-  //           updateOption(index, 'name', option.name);
-  //           updateOption(index, 'value', option.value);
-  //           updateOption(index, 'price', option.price);
-  //         }
-  //       });
-  //     }
-
-  //     if (watchedValues.discount !== discount) {
-  //       setData({ discount: watchedValues.discount });
-  //     }
-  //   }
-  // }, [watchedValues, setData, category, productName, currentStep, updateOption, options, discount]);
 
   // 기본 정보만 watch
   useEffect(() => {
@@ -152,33 +130,39 @@ export const useProductRegistrationForm = () => {
 
   // 1단계 제출 (기본 정보 -> 상세 정보로)
   const onBasicSubmit = (data) => {
+    console.log('1단계 데이터확인: ', data);
+    setData(data);
+    // 가격 업데이터
+    setData({ itemPrice: data?.options[0].price });
     navigate('/register-product/detail');
   };
 
   // 2단계 제출 (최종 상품 등록)
   const onDetailSubmit = async (data) => {
-    console.log('data:', data);
     const newProduct = {
       ...productData,
       ...data,
       id: Date.now(),
     };
+    console.log('data:', newProduct);
     console.log('newProduct');
-    const saveItem = saveItemMutation.mutateAsync(newProduct);
+    const dataParsed = dataLogics(1, newProduct);
+    console.log(dataParsed);
+    const saveItem = saveItemMutation.mutateAsync(dataParsed);
     await toast.promise(saveItem, {
       loading: '저장하는 중...',
       success: (response) => {
         reset();
-        navigate(`/product-registration-confirmation`);
+        navigate('/seller-market', { replace: true });
         return response?.message || '상품이 성공적으로 저장되었습니다!';
       },
       error: (error) => {
         // 이전 기록: 로컬스토리지 저장
         const existingProducts = JSON.parse(localStorage.getItem('products')) || [];
-        existingProducts.unshift(newProduct);
+        existingProducts.unshift(dataParsed);
         localStorage.setItem('products', JSON.stringify(existingProducts));
         reset();
-        navigate('/seller-market');
+        navigate('/seller-market', { replace: true });
         return '상품 저장에 실패했습니다.';
       },
     });

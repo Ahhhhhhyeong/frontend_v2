@@ -56,11 +56,12 @@ const useCommunityWriteStore = create(
 
       toggleProductTag: (product) =>
         set((state) => {
-          const isAlreadyTagged = state.taggedProducts.some((p) => p.id === product.id);
+          const isAlreadyTagged = state.taggedProducts.some((p) => p === product.id);
+          console.log('zustand에서 태그 관련: ', product);
           if (isAlreadyTagged) {
-            return { taggedProducts: state.taggedProducts.filter((p) => p.id !== product.id) };
+            return { taggedProducts: [...state.taggedProducts] };
           } else {
-            return { taggedProducts: [...state.taggedProducts, product] };
+            return { taggedProducts: [...state.taggedProducts, product?.id] };
           }
         }),
 
@@ -76,7 +77,6 @@ const useCommunityWriteStore = create(
           content: '',
           images: [],
           taggedProducts: [],
-          category: '공예품',
         }),
     }),
     {

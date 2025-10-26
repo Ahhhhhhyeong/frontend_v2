@@ -6,9 +6,10 @@ export default function CommonHeader({ leftButton = 'prev', rightButton = '', ti
   const navigate = useNavigate();
   // 왼쪽 버튼 눌렸을 떄
   const handleLeftButtonClick = () => {
-    if (leftButton === 'prev' && leftButton === 'close') {
-      navigate(-1);
-    }
+    navigate(-1);
+    // if (leftButton === 'prev' && leftButton === 'close') {
+    // navigate(-1);
+    // }
     // return;
   };
   return (

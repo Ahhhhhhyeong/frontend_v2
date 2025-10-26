@@ -13,37 +13,16 @@ export const useCommunityPosts = (initialParams = {}) => {
 
   // 포스트 가져오기
   const fetchPosts = async (params = {}, replace = true) => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await communityApi.getPosts({
+    useQuery({
+      queryKey: ['community'],
+      queryFn: communityApi.getPosts({
         ...initialParams,
         ...params,
         page: replace ? 1 : page,
-      });
+      }),
 
-      const newPosts = response.data || response;
-
-      if (replace) {
-        setPosts(newPosts);
-        setPage(1);
-      } else {
-        setPosts((prev) => [...prev, ...newPosts]);
-      }
-
-      setHasMore(newPosts.length > 0);
-    } catch (err) {
-      console.error('포스트를 불러오는데 실패했습니다:', err);
-      setError(err.message || '데이터를 불러오는데 실패했습니다.');
-
-      // 첫 로드 시에만 폴백 데이터 사용
-      if (replace && posts.length === 0) {
-        setPosts(farmerStories);
-      }
-    } finally {
-      setLoading(false);
-    }
+      staleTime: 10000 * 60 * 5,
+    });
   };
 
   // 더 많은 포스트 로드 (무한 스크롤용)
@@ -97,6 +76,7 @@ export const useCommunityPosts = (initialParams = {}) => {
     error,
     hasMore,
     fetchPosts,
+    // allPosts: fetchPosts.data,
     loadMore,
     addPost,
     toggleLike,
@@ -131,7 +111,7 @@ export const fetchById = (postId) => {
           },
         ],
       }),
-    staleTime: 60 * 60 * 1000, // 60분
+    staleTime: 10 * 60 * 1000, // 60분
   });
   // setPosts([data]);
   return { data, isStale };
