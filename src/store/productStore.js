@@ -15,7 +15,7 @@ const useProductStore = create(
   persist(
     (set, get) => ({
       // --- 기본 정보 ---
-      productName: '',
+      itemName: '',
       mainImage: null,
       category: '',
       marketName: '새벽들딸기농원',
@@ -121,7 +121,7 @@ const useProductStore = create(
       removeOption: (index) => set((state) => ({ options: state.options.filter((_, i) => i !== index) })),
       reset: () =>
         set({
-          productName: '',
+          itemName: '',
           mainImage: null,
           category: '',
           career: '',

@@ -15,7 +15,14 @@ const CameraIcon = () => (
   </svg>
 );
 
-export const ImageUpload = ({ control, Controller, validationRules, errors, handleImageChange }) => (
+export const ImageUpload = ({
+  control,
+  Controller,
+  validationRules,
+  errors,
+  handleImageChange,
+  name = 'mainImage',
+}) => (
   <div className={styles.inputGroup}>
     <label className={styles.label}>
       대표 이미지를 올려주세요 <span className={styles.required}>*</span>
@@ -31,7 +38,7 @@ export const ImageUpload = ({ control, Controller, validationRules, errors, hand
       className='mx-auto'
     />
     <Controller
-      name='mainImage'
+      name={name}
       control={control}
       rules={validationRules.mainImage}
       render={({ field: { onChange, value } }) => (

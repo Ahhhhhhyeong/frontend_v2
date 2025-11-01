@@ -7,6 +7,8 @@ import { use } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postApi } from '../services/postApi';
 import toast from 'react-hot-toast';
+import { createFormData } from '../utils/formData';
+import { communityWriteMapper } from '../utils/communityWriteDataMapper';
 
 /**
  * react-hook-form + zustand 연동을 위한 커스텀 훅
@@ -57,7 +59,9 @@ export default function useCommunityWriteForm() {
       images: images,
     };
     console.log('파라미터: ', params);
-    const saveItem = savePostMutation.mutateAsync(params);
+    const mapper = communityWriteMapper(params);
+    console.log('Mapper: ', mapper);
+    const saveItem = savePostMutation.mutateAsync(mapper);
 
     await toast.promise(saveItem, {
       loading: '저장하는 중...',

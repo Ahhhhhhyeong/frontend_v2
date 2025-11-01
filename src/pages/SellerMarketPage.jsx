@@ -78,7 +78,7 @@ export default function SellerMarketPage() {
                 {/* <b className={styles.kg}>{product.productName}</b> */}
                 <b className={`${styles.kg}`}>{product.productName || product.itemName}</b>
                 <div className={styles.price}>
-                  {product.discount && <div className={styles.div10}>{product.discount}%</div>}
+                  {product.discount >= '0' && <div className={styles.div10}>{product.discount}%</div>}
                   <div className={styles.div7}>
                     {product.options?.[0]?.price
                       ? `${new Intl.NumberFormat('ko-KR').format(

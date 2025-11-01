@@ -5,34 +5,64 @@ import { farmerStories } from '../data';
 import { useQuery } from '@tanstack/react-query';
 
 export const useCommunityPosts = (initialParams = {}) => {
+  const [params, setParams] = useState(initialParams);
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+
+  // 기본 포스트 조회 (현재는 로컬스토리지, 나중에 API로 변경)
+  const {
+    data: fetchedPosts,
+    isLoading: loading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ['community', params],
+    queryFn: async ({ pageParam = 1 }) => {
+      const response = await communityApi.getPosts({
+        ...params,
+        page: pageParam,
+        limit: 10,
+      });
+      return response;
+    },
+    staleTime: 10000 * 60 * 5,
+    onSuccess: (data) => {
+      // replace 여부에 따라 데이터 처리
+      if (params.replace !== false) {
+        setPosts(data);
+      } else {
+        // 무한스크롤용 - 기존 데이터에 추가
+        setPosts((prev) => [...prev, ...data]);
+      }
+    },
+  });
+
+  // 무한스크롤을 위한 별도 상태
   const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   // 포스트 가져오기
-  const fetchPosts = async (params = {}, replace = true) => {
-    useQuery({
-      queryKey: ['community'],
-      queryFn: communityApi.getPosts({
-        ...initialParams,
-        ...params,
-        page: replace ? 1 : page,
-      }),
+  const fetchPosts = (newParams = {}, replace = true) => {
+    const updatedParams = {
+      ...params,
+      ...newParams,
+      page: replace ? 1 : page,
+      replace,
+    };
+    setParams(updatedParams);
 
-      staleTime: 10000 * 60 * 5,
-    });
+    if (replace) {
+      setPage(1);
+    }
   };
 
   // 더 많은 포스트 로드 (무한 스크롤용)
-  const loadMore = async () => {
+  const loadMore = () => {
     if (!hasMore || loading) return;
 
     const nextPage = page + 1;
     setPage(nextPage);
 
-    await fetchPosts({ page: nextPage }, false);
+    fetchPosts({ page: nextPage }, false);
   };
 
   // 새 포스트 추가
@@ -65,10 +95,13 @@ export const useCommunityPosts = (initialParams = {}) => {
     fetchPosts({ category });
   };
 
-  // 초기 로드
+  // hasMore 로직 (실제 데이터에 따라 조정 필요)
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    if (fetchedPosts && fetchedPosts.length < 10) {
+      // 예: 페이지당 10개씩
+      setHasMore(false);
+    }
+  }, [fetchedPosts]);
 
   return {
     posts,
@@ -76,12 +109,10 @@ export const useCommunityPosts = (initialParams = {}) => {
     error,
     hasMore,
     fetchPosts,
-    // allPosts: fetchPosts.data,
     loadMore,
     addPost,
     toggleLike,
     filterByCategory,
-    // fetchById,
     refetch: () => fetchPosts({}, true),
   };
 };
@@ -91,7 +122,7 @@ export const fetchById = (postId) => {
   // 임의 목데이터로 보내기
   const { data, isStale } = useQuery({
     queryKey: ['communityPost', postId],
-    // queryFn: () => communityApi.getPostById(postId),
+    // queryFn: () => communityApi.getPostsDetail(postId),
     queryFn: () =>
       Promise.resolve({
         postId: 0,

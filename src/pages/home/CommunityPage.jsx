@@ -15,29 +15,32 @@ import { useCommunityPosts } from '../../hooks/useCommunityPosts';
 
 export default function CommunityPage() {
   // 카테고리 내용 호출
-  const { allPosts } = useCommunityPosts();
-  console.log(allPosts);
+  const { allPosts } = useCommunityPosts({ pageParam: 1 });
+  console.log('appPosts: ', allPosts);
   // TODO: 물품 호출(필요시)
 
   const [activeTooltipId, setActiveTooltipId] = useState(null);
   const { isSeller } = useUserCheck();
 
-  // 필터링된 게시물
-  const filteredPosts = farmerStories;
+  // 게시물
+  const filteredPosts = allPosts?.content;
 
   return (
     <div className='relative '>
       {/* 게시물 목록 */}
       <div className='flex flex-col w-full items-start bg-white'>
-        {filteredPosts &&
+        {filteredPosts ? (
           filteredPosts?.map((post) => (
             <CommunityPost
-              key={post.id}
+              key={post?.postId}
               post={post}
               activeTooltipId={activeTooltipId}
               setActiveTooltipId={setActiveTooltipId}
             />
-          ))}
+          ))
+        ) : (
+          <p className='p-4'>커뮤니티 글이 없습니다.</p>
+        )}
       </div>
 
       {/* 플로트 버튼 */}

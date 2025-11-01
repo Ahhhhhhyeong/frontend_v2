@@ -10,9 +10,9 @@ export const dataLogics = (producerId, data) => {
     // categoryId: findCategoryNo(data?.category),
     categoryId: 1,
     itemName: data?.itemName,
-    itemPrice: data?.options[0].price, // 옵션의 첫번째 값 가격
-    discountRate: parseInt(data?.discount),
-    description: null,
+    itemPrice: Number(data?.options[0].price), // 옵션의 첫번째 값 가격 (숫자로 변환)
+    discountRate: parseInt(data?.discount), // 할인율 숫자로 변환
+    description: 'desciption',
     origin: data?.details[0]?.title,
     originDetails: data?.details[0]?.content,
     farmingMethod: data?.details[1]?.title,
@@ -22,7 +22,7 @@ export const dataLogics = (producerId, data) => {
     packageMethod: data?.details[3]?.title,
     packageDetails: data?.details[3]?.content,
     expirationDate: now.toLocaleDateString(),
-    storageMethod: data?.storageOption,
+    storageMethod: '냉장보관',
     itemStatus: data?.category,
     stockQuantity: 100,
     subCategoryIds: [1],

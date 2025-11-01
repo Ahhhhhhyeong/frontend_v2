@@ -16,7 +16,7 @@ export const useProductRegistrationForm = () => {
 
   const {
     // 기본 정보
-    productName,
+    itemName,
     category,
     mainImage,
     setData,
@@ -49,7 +49,7 @@ export const useProductRegistrationForm = () => {
       // category: category || '',
       // categoryId: findCategoryNo(category, categories),
       category: '과일',
-      itemName: productName || '',
+      itemName: itemName || '',
       itemPrice: productData.itemPrice || 0,
       mainImage: mainImage || null,
       marketName: marketName || '',
@@ -92,22 +92,22 @@ export const useProductRegistrationForm = () => {
   useEffect(() => {
     // 기본 정보 동기화
     setValue('category', category || '');
-    setValue('itemName', productName || '');
+    setValue('itemName', itemName || '');
     setValue('mainImage', mainImage || null);
 
     // 상세 정보 동기화
     setValue('details', details || []);
     setValue('options', options.length > 0 ? options : [{ name: '', value: '', price: '' }]);
     setValue('discount', discount || 0);
-  }, [category, productName, mainImage, details, options, discount, setValue]);
+  }, [category, itemName, mainImage, details, options, discount, setValue]);
 
   // 기본 정보만 watch
   useEffect(() => {
     if (watchedCategory !== category) {
       setData({ category: watchedCategory });
     }
-    if (watchedProductName !== productName) {
-      setData({ productName: watchedProductName });
+    if (watchedProductName !== itemName) {
+      setData({ itemName: watchedProductName });
     }
   }, [watchedCategory, watchedProductName]);
 
@@ -159,7 +159,7 @@ export const useProductRegistrationForm = () => {
       error: (error) => {
         // 이전 기록: 로컬스토리지 저장
         const existingProducts = JSON.parse(localStorage.getItem('products')) || [];
-        existingProducts.unshift(dataParsed);
+        existingProducts.unshift(newProduct);
         localStorage.setItem('products', JSON.stringify(existingProducts));
         reset();
         navigate('/seller-market', { replace: true });
@@ -221,7 +221,7 @@ export const useProductRegistrationForm = () => {
       mainImage: {
         required: '대표 이미지를 업로드해주세요.',
       },
-      productName: {
+      itemName: {
         required: '상품명을 입력해주세요.',
         maxLength: {
           value: 30,
@@ -321,7 +321,7 @@ export const useBasicFormData = () => {
     validationRules: {
       category: formData.validationRules.category,
       mainImage: formData.validationRules.mainImage,
-      productName: formData.validationRules.productName,
+      itemName: formData.validationRules.productName,
     },
   };
 };

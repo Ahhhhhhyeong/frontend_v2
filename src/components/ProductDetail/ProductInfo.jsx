@@ -26,10 +26,10 @@ export const ProductInfo = ({ product }) => {
           <div className={styles.div2}>(0)</div>
         </div>
         <div className={styles.price}>
-          {product.discount && <b className={styles.b}>{product.discount}%</b>}
+          {product.discount >= 0 && <b className={styles.b}>{product.discount}%</b>}
           <b className={styles.b1}>{formatPrice(discountedPrice) || 0}원</b>
         </div>
-        {product.discount && <div className={styles.div4}>{formatPrice(firstOptionPrice)}원</div>}
+        {product.discount >= 0 && <div className={styles.div4}>{formatPrice(firstOptionPrice)}원</div>}
       </div>
 
       <ProductDetailList product={product} />
@@ -49,7 +49,7 @@ const ProductDetailList = ({ product }) => (
     </div>
     <div className='grid grid-cols-[100px_1fr] gap-4'>
       <div className='text-gray-500 text-sm font-medium leading-tight'>재배방식</div>
-      <div className='text-gray-900 text-sm font-normal leading-tight'>{product.cultivationMethod}</div>
+      <div className='text-gray-900 text-sm font-normal leading-tight'>{product.cultivationMethod || '유기농'}</div>
     </div>
   </div>
 );

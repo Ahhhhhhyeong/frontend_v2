@@ -1,11 +1,22 @@
 // services/postApi.js
+import axios from 'axios';
+import { createFormDataForMultipart } from '../utils/formData';
 import api from './api';
+import config from './config';
 
 export const postApi = {
   // POST 요청
   createPost: async (id, postData) => {
     try {
-      const resp = await api.post(`/posts/${id}`, postData);
+      const formData = createFormDataForMultipart(postData);
+      // const resp = await api.post(`/posts/${id}`, formData);
+      const resp = await fetch(`${config.apiUrl}/posts/${id}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
       return resp;
     } catch (error) {
       throw error;

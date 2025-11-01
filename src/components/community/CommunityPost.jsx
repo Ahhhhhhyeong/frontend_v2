@@ -6,10 +6,12 @@ import PostImageWithTags from './PostImageWithTag';
 import PostInteractionBar from '@/components/social/PostInteractionBar';
 import LinkedProductList from './LinkedProductList';
 import { useNavigate } from 'react-router-dom';
+import { seller } from '../../data';
 
 export default function CommunityPost({ post, activeTooltipId, setActiveTooltipId }) {
+  // 게시글 작성자 정보 검색하는 API가 없어서 그냥 목데이터 호출
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(post.likeCount || 0);
+  const [likeCount, setLikeCount] = useState(post?.likeCount || 0);
   const navigation = useNavigate();
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -29,22 +31,23 @@ export default function CommunityPost({ post, activeTooltipId, setActiveTooltipI
 
   return (
     <article className='w-full py-12'>
-      <PostHeader user={post.user} />
+      {/* <PostHeader user={post.user} /> */}
+      <PostHeader user={seller} />
 
-      <div onClick={() => navigation(`/community/${post.id}`)} className='hover:cursor-pointer'>
+      <div onClick={() => navigation(`/community/${post.postId}`)} className='hover:cursor-pointer'>
         <PostContent content={post.content} />
       </div>
 
-      {/* 배찌 추가 */}
-      {post.images && post.images.length > 0 && <PostImageWithTags post={post} />}
+      {/* 이미지 추가 */}
+      {post?.mediaUrls && post?.mediaUrls.length > 0 && <PostImageWithTags post={post} />}
 
       {/* 상품 데이터 */}
-      {Array.isArray(post?.product) && post.product.length > 0 && (
+      {Array.isArray(post?.items) && post.items.length > 0 && (
         <div
           // onClick={() => navigation(`/product-detail/${post.id}`)}
           onClick={() => console.log('상세페이지 이동해야함')}
           className='hover:cursor-pointer'>
-          <LinkedProductList products={post.product} />
+          <LinkedProductList products={post?.items} />
         </div>
       )}
 
