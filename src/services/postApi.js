@@ -8,15 +8,23 @@ export const postApi = {
   // POST 요청
   createPost: async (id, postData) => {
     try {
+      console.log('🔍 1. API 호출 시작 - 원본 데이터:', postData);
+
       const formData = createFormDataForMultipart(postData);
-      // const resp = await api.post(`/posts/${id}`, formData);
-      const resp = await fetch(`${config.apiUrl}/posts/${id}`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'ngrok-skip-browser-warning': 'true',
-        },
-      });
+
+      console.log('🔍 2. FormData 생성 직후 재확인:');
+      let checkCount = 0;
+      for (let [key, value] of formData.entries()) {
+        checkCount++;
+        console.log(`  재확인 ${key}:`, value);
+      }
+      console.log(`🔍 재확인 항목 수: ${checkCount}`);
+
+      console.log('🔍 3. API 호출 직전');
+
+      // FormData를 직접 전달
+      const resp = await api.post(`/posts/${id}`, formData);
+      console.log('✅ API 호출 성공:', resp);
       return resp;
     } catch (error) {
       throw error;

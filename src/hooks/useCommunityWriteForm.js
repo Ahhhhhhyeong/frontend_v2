@@ -72,12 +72,6 @@ export default function useCommunityWriteForm() {
       },
       error: (error) => {
         console.error('저장 실패: ', error);
-        // 로컬스토리지 저장???
-        const existingProducts = JSON.parse(localStorage.getItem('community')) || [];
-        existingProducts.unshift(params);
-        localStorage.setItem('community', JSON.stringify(existingProducts));
-        reset();
-        navigate('/community', { replace: true });
         return '저장에 실패했습니다.';
       },
     });

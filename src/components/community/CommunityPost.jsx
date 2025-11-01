@@ -29,6 +29,12 @@ export default function CommunityPost({ post, activeTooltipId, setActiveTooltipI
     console.log('북마크 클릭');
   };
 
+  const onProductClick = (id) => {
+    // 상품 디테일로 이동
+    console.log('클릭한 상품', id);
+    // navigation(`/product-detail/${id}`)
+  };
+
   return (
     <article className='w-full py-12'>
       {/* <PostHeader user={post.user} /> */}
@@ -47,7 +53,7 @@ export default function CommunityPost({ post, activeTooltipId, setActiveTooltipI
           // onClick={() => navigation(`/product-detail/${post.id}`)}
           onClick={() => console.log('상세페이지 이동해야함')}
           className='hover:cursor-pointer'>
-          <LinkedProductList products={post?.items} />
+          <LinkedProductList products={post?.items} onProductClick={onProductClick} />
         </div>
       )}
 

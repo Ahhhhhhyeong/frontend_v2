@@ -8,7 +8,7 @@ export const useCommunityPosts = (initialParams = {}) => {
   const [params, setParams] = useState(initialParams);
   const [posts, setPosts] = useState([]);
 
-  // 기본 포스트 조회 (현재는 로컬스토리지, 나중에 API로 변경)
+  // 기본 포스트 조회
   const {
     data: fetchedPosts,
     isLoading: loading,

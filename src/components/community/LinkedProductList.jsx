@@ -15,7 +15,7 @@ const LinkedProductList = ({ products = [], onProductClick }) => {
     <div className='self-stretch w-full px-5 py-2 inline-flex justify-start items-start gap-1 overflow-x-auto'>
       {products &&
         products.map((product) => (
-          <LinkedProductCard key={product.id} product={product} onClick={() => onProductClick?.(product.id)} />
+          <LinkedProductCard key={product.id} product={product} onClick={() => onProductClick(product?.id)} />
         ))}
     </div>
   );
