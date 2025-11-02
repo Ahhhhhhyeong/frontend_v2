@@ -153,7 +153,7 @@ export const useProductRegistrationForm = () => {
       loading: '저장하는 중...',
       success: (response) => {
         reset();
-        navigate('/seller-market', { replace: true });
+        navigate('/seller-market', { replace: false });
         return response?.message || '상품이 성공적으로 저장되었습니다!';
       },
       error: (error) => {
@@ -162,7 +162,7 @@ export const useProductRegistrationForm = () => {
         existingProducts.unshift(newProduct);
         localStorage.setItem('products', JSON.stringify(existingProducts));
         reset();
-        navigate('/seller-market', { replace: true });
+        navigate('/seller-market', { replace: false });
         return '상품 저장에 실패했습니다.';
       },
     });
